@@ -2,7 +2,7 @@
 
 namespace Indatus\Callbot\Commands;
 
-use Indatus\Callbot\ConfigReader;
+use Indatus\Callbot\Config;
 use Indatus\Callbot\Factories\FileStoreFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
 use Symfony\Component\Console\Command\Command;
@@ -18,7 +18,7 @@ class CallCommand extends Command
     public function __construct(
         CallServiceFactory $callServiceFactory,
         FileStoreFactory $fileStoreFactory,
-        ConfigReader $config
+        Config $config
     ) {
         $this->callService = $callServiceFactory->make($config->get('callService.driver'));
         $this->fileStore = $fileStoreFactory->make($config->get('fileStore.driver'));

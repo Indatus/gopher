@@ -2,7 +2,7 @@
 
 namespace Indatus\Callbot;
 
-class ConfigReader
+class Config
 {
     protected $config;
 

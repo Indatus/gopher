@@ -3,7 +3,7 @@
 
 require "vendor/autoload.php";
 
-use Indatus\Callbot\ConfigReader;
+use Indatus\Callbot\Config;
 use Indatus\Callbot\Commands\CallCommand;
 use Symfony\Component\Console\Application;
 use Indatus\Callbot\Factories\FileStoreFactory;
@@ -14,7 +14,7 @@ $application->add(
     new CallCommand(
         new CallServiceFactory,
         new FileStoreFactory,
-        new ConfigReader
+        new Config
     )
 );
 $application->run();
