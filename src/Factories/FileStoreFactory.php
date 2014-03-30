@@ -23,7 +23,8 @@ class FileStoreFactory
                     new S3(
                         $this->config->get('fileStore.credentials.accessKey'),
                         $this->config->get('fileStore.credentials.secretKey')
-                    )
+                    ),
+                    new Config
                 );
                 break;
 

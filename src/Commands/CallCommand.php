@@ -15,6 +15,7 @@ class CallCommand extends Command
     protected $callService;
     protected $fileStore;
     protected $config;
+    protected $script;
 
     public function __construct(
         CallServiceFactory $callServiceFactory,
@@ -40,7 +41,11 @@ class CallCommand extends Command
     {
         if (array_key_exists('message', $this->config->get('callDetails'))) {
             $this->generator->parseMessage($this->config->get('callDetails.message'));
-            var_dump($this->generator->getScript());
+            $this->script = $this->generator->getScript();
+        }
+
+        if (!is_null($this->script)) {
+            $this->fileStore->put($script);
         }
     }
 }

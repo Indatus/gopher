@@ -41,8 +41,9 @@ return [
         'driver' => 'S3',
 
         'credentials' => [
-            'accessKey' => 'XXXXXXXXXXXXXXXXX',
-            'secretKey' => 'XXXXXXXXXXXXXXXXX'
+            'accessKey' => 'AKIAJA53SRTONA7J7AMQ',
+            'secretKey' => '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',
+            'bucketName' => 'com.indatus.callbot-bucket'
         ]
 
     ]
