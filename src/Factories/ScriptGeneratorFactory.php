@@ -7,13 +7,6 @@ use Indatus\Callbot\TwimlScriptGenerator;
 
 class ScriptGeneratorFactory
 {
-    protected $config;
-
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
-    }
-
     public function make($driver)
     {
         switch ($driver) {

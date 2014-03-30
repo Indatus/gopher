@@ -8,12 +8,14 @@ use Indatus\Callbot\Commands\CallCommand;
 use Symfony\Component\Console\Application;
 use Indatus\Callbot\Factories\FileStoreFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
+use Indatus\Callbot\Factories\ScriptGeneratorFactory;
 
 $application = new Application;
 $application->add(
     new CallCommand(
         new CallServiceFactory(new Config),
         new FileStoreFactory(new Config),
+        new ScriptGeneratorFactory,
         new Config
     )
 );

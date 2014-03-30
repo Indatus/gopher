@@ -5,9 +5,22 @@ return [
     'callDetails' => [
 
         'number' => '8594667465',
-        'srcFile' => null,
         'destFile' => 'test-call.xml',
-        'message' => ['say' => 'This is a test call.']
+        'message' => [
+            [
+                'verb' => 'say',
+                'text' => 'This is a test call.',
+                'options' => ['voice' => 'woman']
+            ],
+            [
+                'verb' => 'pause',
+                'options' => ['length' => 10]
+            ],
+            [
+                'verb' => 'say',
+                'text' => 'Goodbye'
+            ]
+        ]
 
     ],
 
