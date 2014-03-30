@@ -12,8 +12,8 @@ use Indatus\Callbot\Factories\CallServiceFactory;
 $application = new Application;
 $application->add(
     new CallCommand(
-        new CallServiceFactory,
-        new FileStoreFactory,
+        new CallServiceFactory(new Config),
+        new FileStoreFactory(new Config),
         new Config
     )
 );

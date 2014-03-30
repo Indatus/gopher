@@ -5,8 +5,9 @@ return [
     'callDetails' => [
 
         'number' => '8594667465',
-        'message' => ['say' => 'This is a test call.'],
-        'uploadUrl' => 'test-call.xml'
+        'srcFile' => null,
+        'destFile' => 'test-call.xml',
+        'message' => ['say' => 'This is a test call.']
 
     ],
 

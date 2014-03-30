@@ -4,6 +4,7 @@ namespace Indatus\Callbot\Factories;
 
 use Services_Twilio;
 use Indatus\Callbot\Config;
+use Indatus\Callbot\TwilioCallService;
 
 class CallServiceFactory
 {
@@ -18,9 +19,11 @@ class CallServiceFactory
     {
         switch ($driver) {
             case 'twilio':
-                return new Services_Twilio(
-                    $this->config->get('callService.credentials.accountSid'),
-                    $this->config->get('callService.credentials.authToken')
+                return new TwilioCallService(
+                    new Services_Twilio(
+                        $this->config->get('callService.credentials.accountSid'),
+                        $this->config->get('callService.credentials.authToken')
+                    )
                 );
                 break;
 

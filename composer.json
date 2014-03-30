@@ -10,8 +10,7 @@
     "autoload": {
         "psr-4": {
             "Indatus\\Callbot\\": "src/"
-        },
-        "files": ["creds.php"]
+        }
     },
     "license": "MIT",
     "authors": [

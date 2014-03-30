@@ -3,6 +3,8 @@
 namespace Indatus\Callbot\Factories;
 
 use S3;
+use Indatus\Callbot\Config;
+use Indatus\Callbot\S3FileStore;
 
 class FileStoreFactory
 {
@@ -17,9 +19,11 @@ class FileStoreFactory
     {
         switch ($driver) {
             case 'S3':
-                return new S3(
-                    $this->config->get('fileStore.credentials.accessKey'),
-                    $this->config->get('fileStore.credentials.secretKey')
+                return new S3FileStore(
+                    new S3(
+                        $this->config->get('fileStore.credentials.accessKey'),
+                        $this->config->get('fileStore.credentials.secretKey')
+                    )
                 );
                 break;
 
