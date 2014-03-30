@@ -12,8 +12,7 @@ A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a s
 ### Twilio Setup
 
 1. Signup for a free [Twilio](https://www.twilio.com/try-twilio) account.
-2. Rename `creds.example.php` to `creds.php`.
-3. Enter your Account SID, Auth Token, and Twilio Phone Number
+2. Open `config.php` and enter your Account SID, Auth Token, and Twilio Phone Number
 
 ### Amazon S3 Setup
 
@@ -21,6 +20,6 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 
 1. Signup for a free [Amazon S3](https://console.aws.amazon.com/s3/) account.
 2. Create a bucket and give Everyone "View" permissions in the S3 console.
-3. Open `creds.php` and enter your Access Key and Secret Key.
+3. Open `config.php` and enter your Access Key and Secret Key.
 
 ## Usage

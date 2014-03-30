@@ -15,9 +15,9 @@ return [
         'driver' => 'twilio',
 
         'credentials' => [
-            'accountSid' => TW_ACCOUNT_SID,
-            'authToken' => TW_AUTH_TOKEN,
-            'sourcePhone' => TW_SOURCE_PHONE
+            'accountSid' => 'XXXXXXXXXXXXXXXXX',
+            'authToken' => 'XXXXXXXXXXXXXXXXX',
+            'fromPhone' => '+15551234567'
         ]
 
     ],
@@ -27,8 +27,8 @@ return [
         'driver' => 'S3',
 
         'credentials' => [
-            'accessKey' => AWS_ACCESS_KEY,
-            'secretKey' => AWS_SECRET_KEY
+            'accessKey' => 'XXXXXXXXXXXXXXXXX',
+            'secretKey' => 'XXXXXXXXXXXXXXXXX'
         ]
 
     ]
