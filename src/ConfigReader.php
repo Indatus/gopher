@@ -1,5 +1,7 @@
 <?php
 
+namespace Indatus\Callbot;
+
 class ConfigReader
 {
     protected $config;

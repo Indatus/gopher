@@ -2,11 +2,19 @@
 <?php
 
 require "vendor/autoload.php";
-require 'CallCommand.php';
-require 'ConfigReader.php';
 
+use Indatus\Callbot\ConfigReader;
+use Indatus\Callbot\Commands\CallCommand;
 use Symfony\Component\Console\Application;
+use Indatus\Callbot\Factories\FileStoreFactory;
+use Indatus\Callbot\Factories\CallServiceFactory;
 
 $application = new Application;
-$application->add(new CallCommand(new Services_Twilio_Twiml));
+$application->add(
+    new CallCommand(
+        new CallServiceFactory,
+        new FileStoreFactory,
+        new ConfigReader
+    )
+);
 $application->run();
