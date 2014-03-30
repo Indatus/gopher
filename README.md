@@ -1,6 +1,6 @@
 # Callbot
 
-A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a simple CLI interface for making batches of test via Twilio by simply running a command on the CLI.
+A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a simple CLI interface for making batches of test calls. It is configured to use Twilio out of the box, but can be configured to use any similar service.
 
 ## Amazon S3 Setup
 
