@@ -4,8 +4,8 @@ A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a s
 
 ## Installation
 
-1. Checkout the repo with `git clone`
-2. CD into the `callbot` directory and run `composer install`
+1. `$ git clone https://github.com/jarstingstall/callbot.git`
+2. `$ cd callbot && composer install`
 
 ## Configuration
 
