@@ -9,6 +9,7 @@ use Indatus\Callbot\Factories\ScriptGeneratorFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputOption;
 
 class CallCommand extends Command
 {
@@ -34,12 +35,29 @@ class CallCommand extends Command
     {
         $this
             ->setName('call')
-            ->setDescription('Call someone');
+            ->setDescription('Run a batch of calls')
+            ->addOption('batches', 'b', InputOption::VALUE_REQUIRED, 'Specify which batches to run');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        foreach ($this->config->get('batches') as $batch) {
+        $allBatches = $this->config->get('batches');
+
+        if ($batches = $input->getOption('batches')) {
+
+            $numbers = explode(',', $batches);
+
+            foreach ($numbers as $number) {
+                $this->batchesToRun[] = $allBatches[$number - 1];
+            }
+
+        } else {
+
+            $this->batchesToRun = $allBatches;
+
+        }
+
+        foreach ($this->batchesToRun as $batch) {
 
             $script = $this->generateScript($batch);
 
