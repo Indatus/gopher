@@ -2,24 +2,31 @@
 
 return [
 
-    'callDetails' => [
-
-        'from' => '+15551234567',
-        'to' => '+15551234567',
-        'destFile' => 'test-call.xml',
-        'message' => [
-            [
-                'verb' => 'say',
-                'text' => 'This is a test call.',
-                'options' => ['voice' => 'woman']
-            ],
-            [
-                'verb' => 'pause',
-                'options' => ['length' => 10]
-            ],
-            [
-                'verb' => 'say',
-                'text' => 'Goodbye'
+    'batches' => [
+        [
+            'from' => '+15551234567',
+            'to' => ['+15551234567', '+15551234567', '+15551234567'],
+            'callbackUrl' => 'http://www.example.com/call.xml',
+            'srcFile' => 'call-scripts/test-script.xml'
+        ],
+        [
+            'from' => '+15551234567',
+            'to' => ['+15551234567', '+15551234567', '+15551234567'],
+            'callbackUrl' => 'http://www.example.com/call-2.xml',
+            'message' => [
+                [
+                    'verb' => 'say',
+                    'text' => 'This is a test call.',
+                    'options' => ['voice' => 'woman']
+                ],
+                [
+                    'verb' => 'pause',
+                    'options' => ['length' => 10]
+                ],
+                [
+                    'verb' => 'say',
+                    'text' => 'Goodbye'
+                ]
             ]
         ]
 
