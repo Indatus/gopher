@@ -12,7 +12,7 @@ A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a s
 ### Twilio Setup
 
 1. Signup for a free [Twilio](https://www.twilio.com/try-twilio) account.
-2. Open `config.php` and enter your Account SID, Auth Token, and Twilio Phone Number
+2. Rename `config.example.php` to `config.php` and enter your Account SID, Auth Token, and Twilio Phone Number
 
 ### Amazon S3 Setup
 
