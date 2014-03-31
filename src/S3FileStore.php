@@ -16,7 +16,7 @@ class S3FileStore implements FileStoreInterface
 
     public function put($script)
     {
-        $this->s3->putObject(
+        return $this->s3->putObject(
             $script,
             $this->config->get('fileStore.credentials.bucketName'),
             $this->config->get('callDetails.destFile'),

@@ -40,12 +40,32 @@ class CallCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (array_key_exists('message', $this->config->get('callDetails'))) {
+
             $this->generator->parseMessage($this->config->get('callDetails.message'));
             $this->script = $this->generator->getScript();
+
+        } elseif (array_key_exists('srcFile', $this->config->get('callDetails'))) {
+
+            $this->script = file_get_contents($this->config->get('callDetails.srcFile'));
+            var_dump($this->script); die;
         }
 
+        if (!$this->uploadScript()) {
+
+            $output->writeln('<error>Failed to upload script.</error>');
+            die;
+
+        }
+
+
+    }
+
+    protected function uploadScript()
+    {
         if (!is_null($this->script)) {
-            $this->fileStore->put($script);
+
+            return $this->fileStore->put($this->script);
+
         }
     }
 }
