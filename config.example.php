@@ -4,7 +4,8 @@ return [
 
     'callDetails' => [
 
-        'number' => '+15551234567',
+        'from' => '+15551234567',
+        'to' => '+15551234567',
         'destFile' => 'test-call.xml',
         'message' => [
             [
@@ -30,8 +31,7 @@ return [
 
         'credentials' => [
             'accountSid' => 'XXXXXXXXXXXXXXXXX',
-            'authToken' => 'XXXXXXXXXXXXXXXXX',
-            'fromPhone' => ''
+            'authToken' => 'XXXXXXXXXXXXXXXXX'
         ]
 
     ],

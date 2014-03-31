@@ -39,37 +39,55 @@ class CallCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (array_key_exists('message', $this->config->get('callDetails'))) {
+        foreach ($this->config->get('batches') as $batch) {
 
-            $this->generator->parseMessage($this->config->get('callDetails.message'));
-            $this->script = $this->generator->getScript();
+            $script = $this->generateScript($batch);
 
-        } elseif (array_key_exists('srcFile', $this->config->get('callDetails'))) {
+            if (!$this->uploadScript($script, $batch)) {
 
-            $this->script = file_get_contents($this->config->get('callDetails.srcFile'));
+                $output->writeln('<error>Failed to upload script.</error>');
+                die;
 
+            }
+
+            foreach ($batch['to'] as $toNumber) {
+
+                $this->callService->call(
+                    $batch['from'],
+                    $toNumber,
+                    $batch['callbackUrl']
+                );
+
+            }
+
+            $output->writeln('<info>Batch complete.</info>');
         }
-
-        if (!$this->uploadScript()) {
-
-            $output->writeln('<error>Failed to upload script.</error>');
-            die;
-
-        }
-
-        $this->callService->call(
-            $this->config->get('callDetails.from'),
-            $this->config->get('callDetails.to'),
-            $this->config->get('callDetails.callbackUrl')
-        );
 
     }
 
-    protected function uploadScript()
+    protected function generateScript($batch)
     {
-        if (!is_null($this->script) || $this->script !== false) {
+        if (array_key_exists('message', $batch)) {
 
-            return $this->fileStore->put($this->script);
+            $this->generator->parseMessage($batch['message']);
+            return $this->generator->getScript();
+
+        } elseif (array_key_exists('srcFile', $batch)) {
+
+            return file_get_contents($batch['srcFile']);
+
+        }
+    }
+
+    protected function uploadScript($script, $batch)
+    {
+        if (!is_null($script) || $script !== false) {
+
+            $parts = explode('/', $batch['callbackUrl']);
+
+            $fileName = end($parts);
+
+            return $this->fileStore->put($script, $fileName);
 
         }
     }
