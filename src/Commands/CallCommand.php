@@ -57,6 +57,11 @@ class CallCommand extends Command
 
         }
 
+        $this->callService->call(
+            $this->config->get('callDetails.from'),
+            $this->config->get('callDetails.to'),
+            $this->config->get('callDetails.callbackUrl')
+        );
 
     }
 

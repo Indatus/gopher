@@ -7,8 +7,18 @@ use Indatus\Callbot\Contracts\CallServiceInterface;
 
 class TwilioCallService implements CallServiceInterface
 {
-    public function __construct(Services_Twilio $callService)
+    public function __construct(Services_Twilio $twilio)
     {
-        $this->callService = $callService;
+        $this->twilio = $twilio;
+    }
+
+    public function call($from, $to, $callbackUrl)
+    {
+        return $this->twilio->account->calls->create(
+            $from,
+            $to,
+            $callbackUrl,
+            array('Method' => 'GET')
+        );
     }
 }

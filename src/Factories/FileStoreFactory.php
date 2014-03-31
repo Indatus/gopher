@@ -24,7 +24,7 @@ class FileStoreFactory
                         $this->config->get('fileStore.credentials.accessKey'),
                         $this->config->get('fileStore.credentials.secretKey')
                     ),
-                    new Config
+                    $this->config
                 );
                 break;
 
