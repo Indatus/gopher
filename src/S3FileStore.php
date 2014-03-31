@@ -16,13 +16,22 @@ class S3FileStore implements FileStoreInterface
 
     public function put($script)
     {
+        $fileName = $this->getFileName();
+
         return $this->s3->putObject(
             $script,
             $this->config->get('fileStore.credentials.bucketName'),
-            $this->config->get('callDetails.destFile'),
+            $fileName,
             S3::ACL_PUBLIC_READ,
             array(),
             array('Content-Type' => 'text/xml')
         );
+    }
+
+    protected function getFileName()
+    {
+        $parts = explode('/', $this->config->get('callDetails.callbackUrl'));
+
+        return end($parts);
     }
 }

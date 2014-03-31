@@ -47,7 +47,7 @@ class CallCommand extends Command
         } elseif (array_key_exists('srcFile', $this->config->get('callDetails'))) {
 
             $this->script = file_get_contents($this->config->get('callDetails.srcFile'));
-            var_dump($this->script); die;
+
         }
 
         if (!$this->uploadScript()) {
@@ -62,7 +62,7 @@ class CallCommand extends Command
 
     protected function uploadScript()
     {
-        if (!is_null($this->script)) {
+        if (!is_null($this->script) || $this->script !== false) {
 
             return $this->fileStore->put($this->script);
 
