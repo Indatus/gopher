@@ -74,7 +74,7 @@ class CallCommand extends Command
                 $call = $this->callService->call(
                     $batch['from'],
                     $toNumber,
-                    $batch['callbackUrl']
+                    $this->uploadName
                 );
 
                 $this->outgoingCalls[] = $call->sid;
@@ -129,11 +129,9 @@ class CallCommand extends Command
     {
         if (!is_null($script) || $script !== false) {
 
-            $parts = explode('/', $batch['callbackUrl']);
+            $this->uploadName = time() . '.xml';
 
-            $fileName = end($parts);
-
-            return $this->fileStore->put($script, $fileName);
+            return $this->fileStore->put($script, $this->uploadName);
 
         }
     }

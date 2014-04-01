@@ -6,13 +6,11 @@ return [
         [
             'from' => '+15551234567',
             'to' => ['+15551234567', '+15551234567', '+15551234567'],
-            'callbackUrl' => 'http://www.example.com/call.xml',
             'srcFile' => 'call-scripts/test-script.xml'
         ],
         [
             'from' => '+15551234567',
             'to' => ['+15551234567', '+15551234567', '+15551234567'],
-            'callbackUrl' => 'http://www.example.com/call-2.xml',
             'message' => [
                 [
                     'verb' => 'say',

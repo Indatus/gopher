@@ -23,7 +23,8 @@ class CallServiceFactory
                     new Services_Twilio(
                         $this->config->get('callService.credentials.accountSid'),
                         $this->config->get('callService.credentials.authToken')
-                    )
+                    ),
+                    $this->config
                 );
                 break;
 
