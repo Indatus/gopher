@@ -28,7 +28,7 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 
 Callbot has the ability to run multiple batches of calls with multiple calls in each batch, but to get started we'll walk through a simple example with one batch containing one call.
 
-1. Open `config.php` and locate the 'batches' element. The default example contains to batches so we'll remove the second batch for this example and we're left with the first:
+* Open `config.php` and locate the 'batches' element. The default example contains two batches so we'll remove the second batch for this example and we're left with the first:
 
 ```
 'batches' => [
@@ -41,18 +41,18 @@ Callbot has the ability to run multiple batches of calls with multiple calls in 
 ]
 ```
 
-2. Replace the phone number in the 'from' element with your Twilio phone number.
-3. The 'to' element is an array of phone numbers that will be called when you run the script. For our example, place your phone number as the single element of this array. If you're using the free trial version of Twilio, make sure you've verified your number.
+* Replace the phone number in the 'from' element with your Twilio phone number.
+* The 'to' element is an array of phone numbers that will be called when you run the script. For our example, place your phone number as the single element of this array. If you're using the free trial version of Twilio, make sure you've verified your number.
 
 ```
 'to' => ['+15551234567'],
 ```
 
-4. The 'callbackUrl' is the publicly accessible URL that Twilio will request before the call is placed. Twilio expects to receive an XML file that utilizes the Twilio Markup Language (TwiML). Callbot takes care of uploading your file for you, just provide the URL.
+* The 'callbackUrl' is the publicly accessible URL that Twilio will request before the call is placed. Twilio expects to receive an XML file that utilizes the Twilio Markup Language (TwiML). Callbot takes care of uploading your file for you, just provide the URL.
 
-5. The 'srcFile' is the location of the TwiML file on your machine. For this example, we'll use the script provided so leave this as `call-scripts/test-script.xml`.
+* The 'srcFile' is the location of the TwiML file on your machine. For this example, we'll use the script provided so leave this as `call-scripts/test-script.xml`.
 
-6. We're now ready for Callbot to place the call for us.
+* We're now ready for Callbot to place the call for us.
 
 ```
 $ ./callbot call
