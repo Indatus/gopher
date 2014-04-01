@@ -7,7 +7,7 @@ A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a s
 1. `$ git clone git@gitlab.indatus.com:jarstingstall/callbot.git`
 2. `$ cd callbot && composer install`
 
-## Make A Call Using Twilio and Amazon S3
+## Make An Outgoing Call Using Twilio and Amazon S3
 
 ### Twilio Setup
 
@@ -23,31 +23,16 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 2. Create a bucket and give Everyone "View" permissions in the S3 console.
 3. Open `config.php` and enter your Access Key, Secret Key, and Bucket Name.
 
-### Config.php Setup
+### Make The Call
 
-Callbot has the ability to run multiple batches of calls with multiple calls in each batch, but to get started we'll walk through a simple example with one batch containing one call.
+* We're now ready for Callbot to place the call for us. Run the `callbot` executable, passing in the `call` command. To place a single call, the `call` command requires two arguments:
 
-* Open `config.php` and locate the `'batches'` element. The default example contains two batches so we'll remove the second batch for this example and we're left with the first:
-
-```
-'batches' => [
-    [
-        'to' => ['+15551234567', '+15551234567', '+15551234567'],
-        'srcFile' => 'call-scripts/test-script.xml'
-    ]
-]
-```
-
-* The `'to'` element is an array of phone numbers that will be called when you run the script. For our example, place your phone number as the single element of this array. If you're using the free trial version of Twilio, make sure you've verified your number.
+1. The phone number to call
+2. The path to the call script
 
 ```
-'to' => ['+15551234567'],
+$ ./callbot call 5551234567 call-scripts/test-script.xml
 ```
 
-* The `'srcFile'` is the location of the TwiML file on your machine. For this example, we'll use the script provided so leave this as `call-scripts/test-script.xml`.
+The default call script is located in the `call-scripts` directory and contains TwiML (Twilio Markup Language) that tells Twilio how to handle the outgoing call. Check out the Twilio docs for more info on [TwiML](https://www.twilio.com/docs/api/twiml).
 
-* We're now ready for Callbot to place the call for us.
-
-```
-$ ./callbot call
-```
