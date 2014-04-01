@@ -2,6 +2,7 @@
 
 namespace Indatus\Callbot\Commands;
 
+use DateTime;
 use Indatus\Callbot\Config;
 use Indatus\Callbot\Factories\FileStoreFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
@@ -16,7 +17,7 @@ class CallCommand extends Command
     protected $callService;
     protected $fileStore;
     protected $config;
-    protected $script;
+    protected $outgoingCalls = array();
 
     public function __construct(
         CallServiceFactory $callServiceFactory,
@@ -70,15 +71,42 @@ class CallCommand extends Command
 
             foreach ($batch['to'] as $toNumber) {
 
-                $this->callService->call(
+                $call = $this->callService->call(
                     $batch['from'],
                     $toNumber,
                     $batch['callbackUrl']
                 );
 
+                $this->outgoingCalls[] = $call->sid;
+            }
+        }
+
+        if (!empty($this->outgoingCalls)) {
+
+            $table = $this->getHelperSet()->get('table');
+            $table->setHeaders(['Call SID', 'From', 'To', 'Status']);
+
+            $callResults = $this->callService->getResults($this->outgoingCalls);
+
+            $rows = array();
+
+            if (!empty($callResults)) {
+
+                foreach ($callResults as $call) {
+
+                    $rows[] = [$call->sid, $call->from_formatted, $call->to_formatted, $call->status];
+
+                }
+
             }
 
-            $output->writeln('<info>Batch complete.</info>');
+            if (!empty($rows)) {
+
+                $table->setRows($rows);
+
+            }
+
+            $table->render($output);
         }
 
     }

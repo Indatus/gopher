@@ -21,4 +21,17 @@ class TwilioCallService implements CallServiceInterface
             array('Method' => 'GET')
         );
     }
+
+    public function getResults(array $callIds)
+    {
+        $results = array();
+
+        foreach ($callIds as $id) {
+
+            $results[] = $this->twilio->account->calls->get($id);
+
+        }
+
+        return $results;
+    }
 }
