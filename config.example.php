@@ -4,7 +4,6 @@ return [
 
     'batches' => [
         [
-            'from' => '+15551234567',
             'to' => ['+15551234567', '+15551234567', '+15551234567'],
             'srcFile' => 'call-scripts/test-script.xml'
         ],
@@ -37,7 +36,9 @@ return [
         'credentials' => [
             'accountSid' => 'XXXXXXXXXXXXXXXXX',
             'authToken' => 'XXXXXXXXXXXXXXXXX'
-        ]
+        ],
+
+        'defaultFrom' => '+15551234567'
 
     ],
 

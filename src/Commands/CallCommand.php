@@ -71,8 +71,18 @@ class CallCommand extends Command
 
             foreach ($batch['to'] as $toNumber) {
 
+                if (array_key_exists('from', $batch)) {
+
+                    $from = $batch['from'];
+
+                } else {
+
+                    $from = $this->config->get('callService.defaultFrom');
+
+                }
+
                 $call = $this->callService->call(
-                    $batch['from'],
+                    $from,
                     $toNumber,
                     $this->uploadName
                 );
@@ -107,6 +117,7 @@ class CallCommand extends Command
             }
 
             $table->render($output);
+
         }
 
     }
