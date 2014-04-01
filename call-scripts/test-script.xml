@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Response><Say voice="woman">This is a test call.</Say><Pause length="10"/><Say>Goodbye</Say></Response>
+<Response>
+    <Say voice="woman">This is a test call.</Say>
+    <Pause length="3"/>
+    <Say>Goodbye</Say>
+</Response>
