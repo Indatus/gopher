@@ -37,7 +37,7 @@ class CallCommand extends Command
     {
         $this
             ->setName('call')
-            ->setDescription('Run a batch of calls')
+            ->setDescription('Make a single call')
             ->addArgument('number', InputArgument::OPTIONAL, 'Phone number to call')
             ->addArgument('path', InputArgument::OPTIONAL, 'Path to call script')
             ->addOption('batches', 'b', InputOption::VALUE_REQUIRED, 'Specify which batches to run');

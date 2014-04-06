@@ -25,7 +25,7 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 
 ### Make The Call
 
-* We're now ready for Callbot to place the call for us. Run the `callbot` executable, passing in the `call` command. To place a single call, the `call` command requires two arguments:
+We're now ready for Callbot to place the call for us. Run the `callbot` executable, passing in the `call` command. To place a single call, the `call` command requires two arguments:
 
 1. The phone number to call
 2. The path to the call script
