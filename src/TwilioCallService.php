@@ -24,13 +24,33 @@ class TwilioCallService implements CallServiceInterface
         );
     }
 
-    public function getResults(array $callIds)
+    public function getResults($callIds)
     {
+        // allow the client to pass in a single id or multiple
+        if (!is_array($callIds)) {
+
+            $callIds = array($callIds);
+
+        }
+
         $results = array();
 
         foreach ($callIds as $id) {
 
             $results[] = $this->twilio->account->calls->get($id);
+
+        }
+
+        return $results;
+    }
+
+    public function getRange($range)
+    {
+        if (count($range) == 1) {
+
+            $results = $this->twilio->account->calls->getIterator(0, 50, array(
+                "StartTime>" => $range[0]
+            ));
 
         }
 

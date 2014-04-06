@@ -77,19 +77,17 @@ class CallCommand extends Command
         }
     }
 
-    protected function displayResults($output, $callIds)
+    protected function displayResults($output, $results)
     {
         $table = $this->getHelperSet()->get('table');
 
         $table->setHeaders(['Date\Time', 'Call SID', 'From', 'To', 'Status']);
 
-        $callResults = $this->callService->getResults($callIds);
-
         $rows = array();
 
-        if (!empty($callResults)) {
+        if (!empty($results)) {
 
-            foreach ($callResults as $call) {
+            foreach ($results as $call) {
 
                 $dateTime = $this->formatDate($call->start_time);
 
