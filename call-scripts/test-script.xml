@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Say voice="woman">This is a test call.</Say>
-    <Pause length="3"/>
-    <Say>Goodbye</Say>
+    <Say>Hello Jess. John told me to tell you that he loves you very much.</Say>
+    <Say>Have a great day!</Say>
 </Response>

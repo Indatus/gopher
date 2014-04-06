@@ -33,90 +33,6 @@ class CallCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
-    {
-        $this
-            ->setName('call')
-            ->setDescription('Make a single call')
-            ->addArgument('number', InputArgument::OPTIONAL, 'Phone number to call')
-            ->addArgument('path', InputArgument::OPTIONAL, 'Path to call script')
-            ->addOption('batches', 'b', InputOption::VALUE_REQUIRED, 'Specify which batches to run');
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        if ($input->getArgument('number')) {
-
-            $script = file_get_contents($input->getArgument('path'));
-
-            if (!$this->uploadScript($script)) {
-
-                $output->writeln('<error>Failed to upload script.</error>');
-                die;
-
-            }
-
-            $call = $this->callService->call(
-                $this->config->get('callService.defaultFrom'),
-                $input->getArgument('number'),
-                $this->uploadName
-            );
-
-            $this->outgoingCalls[] = $call->sid;
-
-            if (!empty($this->outgoingCalls)) {
-
-                $this->displayResults($output);
-
-            }
-
-        } else {
-
-            $this->setBatchesToRun($input);
-
-            foreach ($this->batchesToRun as $batch) {
-
-                $script = $this->generateScript($batch);
-
-                if (!$this->uploadScript($script)) {
-
-                    $output->writeln('<error>Failed to upload script.</error>');
-                    die;
-
-                }
-
-                foreach ($batch['to'] as $toNumber) {
-
-                    if (array_key_exists('from', $batch)) {
-
-                        $from = $batch['from'];
-
-                    } else {
-
-                        $from = $this->config->get('callService.defaultFrom');
-
-                    }
-
-                    $call = $this->callService->call(
-                        $from,
-                        $toNumber,
-                        $this->uploadName
-                    );
-
-                    $this->outgoingCalls[] = $call->sid;
-
-                }
-
-            }
-
-            if (!empty($this->outgoingCalls)) {
-
-                $this->displayResults($output);
-
-            }
-        }
-    }
-
     protected function setBatchesToRun($input)
     {
         $allBatches = $this->config->get('batches');
@@ -161,13 +77,13 @@ class CallCommand extends Command
         }
     }
 
-    protected function displayResults($output)
+    protected function displayResults($output, $callIds)
     {
         $table = $this->getHelperSet()->get('table');
 
-        $table->setHeaders(['Call SID', 'From', 'To', 'Status']);
+        $table->setHeaders(['Date\Time', 'Call SID', 'From', 'To', 'Status']);
 
-        $callResults = $this->callService->getResults($this->outgoingCalls);
+        $callResults = $this->callService->getResults($callIds);
 
         $rows = array();
 
@@ -175,7 +91,7 @@ class CallCommand extends Command
 
             foreach ($callResults as $call) {
 
-                $rows[] = [$call->sid, $call->from_formatted, $call->to_formatted, $call->status];
+                $rows[] = [$call->start_time, $call->sid, $call->from_formatted, $call->to_formatted, $call->status];
 
             }
 
