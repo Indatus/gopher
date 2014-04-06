@@ -91,7 +91,9 @@ class CallCommand extends Command
 
             foreach ($callResults as $call) {
 
-                $rows[] = [$call->start_time, $call->sid, $call->from_formatted, $call->to_formatted, $call->status];
+                $dateTime = $this->formatDate($call->start_time);
+
+                $rows[] = [$dateTime, $call->sid, $call->from_formatted, $call->to_formatted, $call->status];
 
             }
 
@@ -104,5 +106,10 @@ class CallCommand extends Command
         }
 
         $table->render($output);
+    }
+
+    protected function formatDate($date)
+    {
+        return (new \DateTime($date))->format('Y-m-d H:i:s');
     }
 }
