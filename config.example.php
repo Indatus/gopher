@@ -35,9 +35,10 @@ return [
 
     // Configured batches of calls
     'batches' => [
-        [
-            'to' => ['5551234567', '5551234567', '5551234567'],
-            'script' => 'call-scripts/test-script.xml'
-        ]
+        'example-1' =>
+            [
+                'to' => ['5551234567', '5551234567', '5551234567'],
+                'script' => 'call-scripts/test-script.xml'
+            ]
     ]
 ];

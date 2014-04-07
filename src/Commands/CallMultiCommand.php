@@ -3,7 +3,7 @@
 use Indatus\Callbot\Commands\CallCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * This command can be used to run multiple batches of calls,
@@ -33,7 +33,7 @@ class CallMultiCommand extends CallCommand
         $this
             ->setName('call:multi')
             ->setDescription("Run multiple batches of calls, each batch having it's own call script")
-            ->addOption('batches', 'b', InputOption::VALUE_REQUIRED, 'Specify which batches to run');
+            ->addArgument('batches', InputArgument::OPTIONAL, 'Comma-separated list of batch names to run');
     }
 
     /**
@@ -46,7 +46,7 @@ class CallMultiCommand extends CallCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $batches = $this->getBatchesToRun($input->getOption('batches'));
+        $batches = $this->getBatchesToRun($input->getArgument('batches'));
 
         foreach ($batches as $batch) {
 
@@ -104,13 +104,13 @@ class CallMultiCommand extends CallCommand
 
         if ($batches) {
 
-            $numbers = explode(',', $batches);
+            $batchNames = explode(',', $batches);
 
             $batchesToRun = array();
 
-            foreach ($numbers as $number) {
+            foreach ($batchNames as $name) {
 
-                $batchesToRun[] = $allBatches[$number - 1];
+                $batchesToRun[] = $allBatches[$name];
 
             }
 

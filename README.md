@@ -76,10 +76,11 @@ Open `config.php` and located the `batches` array. You'll see an example batch:
 
 ```
 'batches' => [
-    [
-        'to' => ['5551234567', '5551234567', '5551234567'],
-        'script' => 'call-scripts/test-script.xml'
-    ]
+    'example-1' =>
+        [
+            'to' => ['5551234567', '5551234567', '5551234567'],
+            'script' => 'call-scripts/test-script.xml'
+        ]
 ]
 ```
 
@@ -89,11 +90,12 @@ A batch has two required elements: `to` and `script`. `to` is an array of phone 
 
 ```
 'batches' => [
-    [
-        'to' => ['5551234567', '5551234567', '5551234567'],
-        'from' => '5557654321',
-        'script' => 'call-scripts/test-script.xml'
-    ]
+    'example-1' =>
+        [
+            'to' => ['5551234567', '5551234567', '5551234567'],
+            'from' => '5557654321',
+            'script' => 'call-scripts/test-script.xml'
+        ]
 ]
 ```
 
@@ -103,6 +105,14 @@ Add as many batches as you'd like to the `batches` array and then run:
 $ ./callbot call:multi
 ```
 
+### Run Specific Batches
+
+You can pass a comma-separated list of batch names to `call:multi` to specify which specific
+batches to run. Make sure to give your batches unique names if you want to use this feature.
+
+```
+$./callbot call:multi example-1,example-2
+```
 
 ---
 
