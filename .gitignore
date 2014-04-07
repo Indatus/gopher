@@ -1,2 +1,4 @@
 vendor/
+call-scripts/*
+!call-scripts/test-script.xml
 config.php
