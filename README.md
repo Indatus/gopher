@@ -106,23 +106,23 @@ $ ./callbot call:multi
 
 ---
 
-## Display Results of Outgoing Calls
+## Display Details of Outgoing Calls
 
-The `call:results` command can be used to display the results of outgoing calls.
+The `call:details` command can be used to display the details of outgoing calls.
 
-Display the results of a specific call with the `id` option:
+Display the details of a specific call with the `id` option:
 
 ```
-$ ./callbot call:results --id="UNIQUE_ID"
+$ ./callbot call:details --id="UNIQUE_ID"
 ```
 
 You can specify multiple unique ids with the `id` option.
 
 ```
-$ ./callbot call:results --id="UNIQUE_ID_1, UNIQUE_ID_2, UNIQUE_ID_3"
+$ ./callbot call:details --id="UNIQUE_ID_1, UNIQUE_ID_2, UNIQUE_ID_3"
 ```
 
-### Using Filters to Narrow Call Results
+### Using Filters to Narrow Call Details
 
 #### Available Filters
 
@@ -137,20 +137,20 @@ $ ./callbot call:results --id="UNIQUE_ID_1, UNIQUE_ID_2, UNIQUE_ID_3"
 
 #### Examples
 
-Get results for calls made on **April 5, 2014** from **555-123-4567**
+Get details for calls made on **April 5, 2014** from **555-123-4567**
 
 ```
-$ ./callbot call:results --on="2014-04-05" --from="5551234567"
+$ ./callbot call:details --on="2014-04-05" --from="5551234567"
 ```
 
-Get results for calls made between **7:00 am** and **10:00 am** on **April 5, 2014** with a **completed** status
+Get details for calls made between **7:00 am** and **10:00 am** on **April 5, 2014** with a **completed** status
 
 ```
-$ ./callbot call:results --after="2014-04-05 07:00:00" --before="2014-04-05 10:00:00" --status="failed"
+$ ./callbot call:details --after="2014-04-05 07:00:00" --before="2014-04-05 10:00:00" --status="failed"
 ```
 
 Display details for all **failed** calls made to **555-123-4567**
 
 ```
-$ ./callbot call:results --status="failed" --to="5551234567"
+$ ./callbot call:details --status="failed" --to="5551234567"
 ```
