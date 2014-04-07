@@ -20,83 +20,95 @@ class CallSingleCommand extends CallCommand
         $this
             ->setName('call:single')
             ->setDescription('Make a single call')
-            ->addArgument('number', InputArgument::OPTIONAL, 'Phone number to call')
-            ->addArgument('path', InputArgument::OPTIONAL, 'Path to call script')
+            ->addArgument('numbers', InputArgument::REQUIRED, 'Comma separated list of phone numbers to call')
+            ->addArgument('path', InputArgument::REQUIRED, 'Path to call script')
+            ->addOption('from', null, InputOption::VALUE_REQUIRED, 'Override default from phone number')
             ->addOption('batches', 'b', InputOption::VALUE_REQUIRED, 'Specify which batches to run');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($input->getArgument('number')) {
+        $script = file_get_contents($input->getArgument('path'));
 
-            $script = file_get_contents($input->getArgument('path'));
+        if (!$this->uploadScript($script)) {
 
-            if (!$this->uploadScript($script)) {
+            $output->writeln('<error>Failed to upload script.</error>');
+            die;
 
-                $output->writeln('<error>Failed to upload script.</error>');
-                die;
+        }
 
-            }
+        $numbers = explode(',', $input->getArgument('numbers'));
 
-            $call = $this->callService->call(
-                $this->config->get('callService.defaultFrom'),
-                $input->getArgument('number'),
+        $from = $this->getFrom($input->getOption('from'));
+
+        foreach ($numbers as $to) {
+
+            $callIds[] = $this->callService->call(
+                $from,
+                $to,
                 $this->uploadName
             );
 
-            $callIds[] = $call->sid;
+        }
 
-            if (!empty($callIds)) {
+        if (!empty($callIds)) {
 
-                $this->displayResults($output, $callIds);
+            $results = $this->callService->getResults($callIds);
 
-            }
+            $this->displayResults($output, $results);
 
-        } else {
-
-            $this->setBatchesToRun($input);
-
-            foreach ($this->batchesToRun as $batch) {
-
-                $script = $this->generateScript($batch);
-
-                if (!$this->uploadScript($script)) {
-
-                    $output->writeln('<error>Failed to upload script.</error>');
-                    die;
-
-                }
-
-                foreach ($batch['to'] as $toNumber) {
-
-                    if (array_key_exists('from', $batch)) {
-
-                        $from = $batch['from'];
-
-                    } else {
-
-                        $from = $this->config->get('callService.defaultFrom');
-
-                    }
-
-                    $call = $this->callService->call(
-                        $from,
-                        $toNumber,
-                        $this->uploadName
-                    );
-
-                    $this->outgoingCalls[] = $call->sid;
-
-                }
-
-            }
-
-            if (!empty($this->outgoingCalls)) {
-
-                $this->displayResults($output);
-
-            }
         }
     }
+            // $this->setBatchesToRun($input);
 
+            // foreach ($this->batchesToRun as $batch) {
+
+            //     $script = $this->generateScript($batch);
+
+            //     if (!$this->uploadScript($script)) {
+
+            //         $output->writeln('<error>Failed to upload script.</error>');
+            //         die;
+
+            //     }
+
+            //     foreach ($batch['to'] as $toNumber) {
+
+            //         if (array_key_exists('from', $batch)) {
+
+            //             $from = $batch['from'];
+
+            //         } else {
+
+            //             $from = $this->config->get('callService.defaultFrom');
+
+            //         }
+
+            //         $call = $this->callService->call(
+            //             $from,
+            //             $toNumber,
+            //             $this->uploadName
+            //         );
+
+            //         $this->outgoingCalls[] = $call->sid;
+
+            //     }
+
+            // }
+
+            // if (!empty($this->outgoingCalls)) {
+
+            //     $this->displayResults($output);
+
+            // }
+
+
+    protected function getFrom($overrideFrom)
+    {
+        if ($overrideFrom) {
+            return $overrideFrom;
+        }
+
+        return $this->config->get('callService.defaultFrom');
+    }
 }

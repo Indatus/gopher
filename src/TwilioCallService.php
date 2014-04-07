@@ -20,12 +20,14 @@ class TwilioCallService implements CallServiceInterface
 
     public function call($from, $to, $uploadName)
     {
-        return $this->twilio->account->calls->create(
+        $call = $this->twilio->account->calls->create(
             $from,
             $to,
             'https://s3.amazonaws.com/' . $this->config->get('fileStore.credentials.bucketName') . '/' . $uploadName,
             array('Method' => 'GET')
         );
+
+        return $call->sid;
     }
 
     public function getResults($callIds)
