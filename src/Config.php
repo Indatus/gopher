@@ -1,16 +1,32 @@
-<?php
+<?php namespace Indatus\Callbot;
 
-namespace Indatus\Callbot;
-
+/**
+ * This class is used to interact with the configuration file.
+ */
 class Config
 {
+    /**
+     * Array of config information
+     *
+     * @var array
+     */
     protected $config;
 
+    /**
+     * Constructor pulls in config array
+     */
     public function __construct()
     {
         $this->config = require 'config.php';
     }
 
+    /**
+     * Get an element from the config array
+     *
+     * @param string $key Config key to get
+     *
+     * @return mixed
+     */
     public function get($key)
     {
         $keys = explode('.', $key);

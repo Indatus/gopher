@@ -1,20 +1,38 @@
-<?php
-
-namespace Indatus\Callbot\Factories;
+<?php namespace Indatus\Callbot\Factories;
 
 use S3;
 use Indatus\Callbot\Config;
 use Indatus\Callbot\S3FileStore;
 
+/**
+ * This class is a factory for creating FileStoreInterface implementations
+ */
 class FileStoreFactory
 {
+    /**
+     * Config instance
+     *
+     * @var Indatus\Callbot\Config
+     */
     protected $config;
 
+    /**
+     * Constructor injects dependancies
+     *
+     * @param Config $config Config instance
+     */
     public function __construct(Config $config)
     {
         $this->config = $config;
     }
 
+    /**
+     * Create a FileStoreInterface implementation
+     *
+     * @param string $driver Driver type
+     *
+     * @return FileStoreInterface
+     */
     public function make($driver)
     {
         switch ($driver) {

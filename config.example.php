@@ -28,9 +28,10 @@ return [
 
         'credentials' => [
             'accessKey' => 'XXXXXXXXXXXXXXXXX',
-            'secretKey' => 'XXXXXXXXXXXXXXXXX',
-            'bucketName' => ''
+            'secretKey' => 'XXXXXXXXXXXXXXXXX'
         ]
+
+        'uploadDir' => 'https://s3.amazonaws.com/BUCKET_NAME'
 
     ]
 

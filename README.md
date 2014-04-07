@@ -30,36 +30,31 @@ See below for further description and examples of these commands.
 
 ### Amazon S3 Setup
 
-Twilio requires an XML script located at a public URL for each call it makes. The script at this URL tells Twilio what to do once the call is answered. Callbot is configured to compile your XML scripts and push them up to an Amazon S3 bucket out of the box. Signing up for Amazon S3 is free and easy:
+Twilio requires an XML script located at a public URL for each call it makes. The script at this URL tells Twilio what to do once the call is answered. Callbot is configured to push your scripts up to an Amazon S3 bucket out of the box. Signing up for Amazon S3 is free:
 
-1. Signup for a free [Amazon S3](https://console.aws.amazon.com/s3/) account.
+1. Signup for an [Amazon S3](https://console.aws.amazon.com/s3/) account.
 2. Create a bucket and give Everyone "View" permissions in the S3 console.
-3. Open `config.php` and enter your Access Key, Secret Key, and Bucket Name.
+3. Open `config.php` and enter your Access Key and Secret Key in the `credentials` array.
+4. Locate the `uploadDir` element and replace BUCKET_NAME with the name of the bucket you created in Step 2.
 
 
 ---
 
 ### Run a Single Batch of Calls
 
-We're now ready for Callbot to place the call for us. Run the `callbot` executable, passing in the `call:single` command. To place a single call, the `call:single` command requires two arguments:
+The `call:single` command can be used to run a single batch of calls that share the same call script. It requires two arguments:
 
-1. The phone number to call
-2. The path to the call script
+1. A comma-separated list of phone numbers to call
+2. The local path to the call script
 
 ```
-$ ./callbot call:single 5551234567 call-scripts/test-script.xml
+$ ./callbot call:single 5551234567,5551234561,5551234562 call-scripts/test-script.xml
 ```
 
 `call:single` uses the default from phone number you provided in `congig.php`. You can override the default from number by passing the `from` option:
 
 ```
 $ ./callbot call:single 5551234567 call-scripts/test-script.xml --from="5551234567"
-```
-
-You can also pass a comma separated list of phone numbers as the first argument to the `call:single` command to make multiple calls using the same call-script:
-
-```
-$ ./callbot call:single 5551234567,5551234561,5551234562 call-scripts/test-script.xml
 ```
 
 > The root-level `call-scripts` directory is used to store your call scripts. An example script is provided to
@@ -89,7 +84,7 @@ Open `config.php` and located the `batches` array. You'll see an example batch:
 
 A batch has two required elements: `to` and `script`. `to` is an array of phone numbers to call and `script` is the local path to the call script to use for the batch.
 
-`call:multi` uses the phone number you provided in `congig.php` in `callServices.defaultFrom` for the default from number. You can override the default from number by including a `from` element with the batch:
+`call:single` uses the default from phone number you provided in `congig.php`. You can override the default from number by including a `from` element with the batch:
 
 ```
 'batches' => [

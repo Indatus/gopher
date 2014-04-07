@@ -1,44 +1,67 @@
-<?php
-
-namespace Indatus\Callbot;
+<?php namespace Indatus\Callbot;
 
 use Services_Twilio;
 use Indatus\Callbot\Config;
 use Indatus\Callbot\Contracts\CallServiceInterface;
 
+/**
+ * This class is a Twilio implementation of the CallServiceInterface
+ */
 class TwilioCallService implements CallServiceInterface
 {
+    /**
+     * Array of filters for detailed call results
+     *
+     * @var array
+     */
     protected $filters = array();
+
+    /**
+     * Services_Twilio instance
+     *
+     * @var Services_Twilio
+     */
     protected $twilio;
+
+    /**
+     * Config instance
+     *
+     * @var Indatus\Callbot\Config
+     */
     protected $config;
 
+    /**
+     * Constructor injects dependancies
+     *
+     * @param Services_Twilio $twilio Services_Twilio instance
+     * @param Config          $config Config instance
+     */
     public function __construct(Services_Twilio $twilio, Config $config)
     {
         $this->twilio = $twilio;
         $this->config = $config;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function call($from, $to, $uploadName)
     {
         $call = $this->twilio->account->calls->create(
             $from,
             $to,
-            'https://s3.amazonaws.com/' . $this->config->get('fileStore.credentials.bucketName') . '/' . $uploadName,
+            $this->config->get('fileStore.uploadDir') . '/' . $uploadName,
             array('Method' => 'GET')
         );
 
         return $call->sid;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getResults($callIds)
     {
-        // allow the client to pass in a single id or multiple
-        if (!is_array($callIds)) {
-
-            $callIds = array($callIds);
-
-        }
-
         $results = array();
 
         foreach ($callIds as $id) {
@@ -50,6 +73,9 @@ class TwilioCallService implements CallServiceInterface
         return $results;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getFilteredResults()
     {
 
@@ -63,6 +89,9 @@ class TwilioCallService implements CallServiceInterface
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function addFilter($type, $value)
     {
         switch ($type) {
