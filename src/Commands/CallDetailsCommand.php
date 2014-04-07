@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * $. /callbot call:results --after="2014-04-01" --before="2014-04-05" status="completed"
  */
-class CallResultsCommand extends CallCommand{
+class CallDetailsCommand extends CallCommand{
 
     /**
      * Command configuration
@@ -27,15 +27,15 @@ class CallResultsCommand extends CallCommand{
     protected function configure()
     {
         $this
-            ->setName('call:results')
-            ->setDescription('Get the results of outgoing calls')
-            ->addOption('id', null , InputOption::VALUE_REQUIRED, 'Get the results for calls with the specified IDs')
-            ->addOption('after', null , InputOption::VALUE_REQUIRED, 'Get the results for all calls placed after the provided date')
-            ->addOption('before', null , InputOption::VALUE_REQUIRED, 'Get the results for all calls placed before the provided date')
-            ->addOption('on', null , InputOption::VALUE_REQUIRED, 'Get the results for all calls placed on the provided date')
-            ->addOption('to', null , InputOption::VALUE_REQUIRED, 'Get the results for all calls to the provided number')
-            ->addOption('from', null , InputOption::VALUE_REQUIRED, 'Get the results for all calls from the provided number')
-            ->addOption('status', null , InputOption::VALUE_REQUIRED, 'Get the results for all calls with the provided status');
+            ->setName('call:details')
+            ->setDescription('Display details of outgoing calls')
+            ->addOption('id', null , InputOption::VALUE_REQUIRED, 'Get the details for calls with the specified IDs')
+            ->addOption('after', null , InputOption::VALUE_REQUIRED, 'Get the details for all calls placed after the provided date')
+            ->addOption('before', null , InputOption::VALUE_REQUIRED, 'Get the details for all calls placed before the provided date')
+            ->addOption('on', null , InputOption::VALUE_REQUIRED, 'Get the details for all calls placed on the provided date')
+            ->addOption('to', null , InputOption::VALUE_REQUIRED, 'Get the details for all calls to the provided number')
+            ->addOption('from', null , InputOption::VALUE_REQUIRED, 'Get the details for all calls from the provided number')
+            ->addOption('status', null , InputOption::VALUE_REQUIRED, 'Get the details for all calls with the provided status');
     }
 
     /**
@@ -52,9 +52,11 @@ class CallResultsCommand extends CallCommand{
 
             $callIds = explode(',', $input->getOption('id'));
 
-            $results = $this->callService->getResults($callIds);
+            $results = $this->callService->getDetails($callIds);
 
-            $this->displayResults($output, $results);
+            $table = $this->buildDetailsTable($results);
+
+            $table->render($output);
 
         } else {
 
@@ -94,9 +96,9 @@ class CallResultsCommand extends CallCommand{
 
             }
 
-            $results = $this->callService->getFilteredResults();
+            $results = $this->callService->getFilteredDetails();
 
-            $table = $this->buildResultsTable($results);
+            $table = $this->buildDetailsTable($results);
 
             $table->render($output);
         }

@@ -13,7 +13,7 @@ A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a s
 | ------------ | --------------------------------------------------------------------- |
 | call:single  | Run a single batch of calls that share the same call script           |
 | call:multi   | Run multiple batches of calls, each batch having it's own call script |
-| call:results | Fetch and display details of outgoing calls                           |
+| call:details | Fetch and display details of outgoing calls                           |
 
 See below for further description and examples of these commands.
 

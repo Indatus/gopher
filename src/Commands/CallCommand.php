@@ -72,25 +72,33 @@ class CallCommand extends Command
     }
 
     /**
-     * Display the results of multiple calls
+     * Display the details of multiple calls
      *
-     * @param array $results Array of call result objects
+     * @param array $calls Array of call details objects
      *
      * @return Symfony\Component\Console\Output\OutputInterface
      */
-    protected function buildResultsTable($results)
+    protected function buildDetailsTable($calls)
     {
         $table = $this->getHelperSet()->get('table');
 
-        $table->setHeaders(['Date\Time', 'Call ID', 'From', 'To', 'Status']);
+        $table->setHeaders(['Start Time', 'End Time', 'From', 'To', 'Status','Call ID']);
 
         $rows = array();
 
-        foreach ($results as $call) {
+        foreach ($calls as $call) {
 
-            $dateTime = $this->formatDate($call->start_time);
+            $startTime = $this->formatDate($call->start_time);
 
-            $rows[] = [$dateTime, $call->sid, $call->from_formatted, $call->to_formatted, $call->status];
+            $endTime = $this->formatDate($call->end_time);
+
+            $rows[] = [
+                $startTime,
+                $endTime,
+                $call->from_formatted,
+                $call->to_formatted,
+                $call->status,
+                $call->sid];
 
         }
 
@@ -112,6 +120,8 @@ class CallCommand extends Command
      */
     protected function formatDate($date)
     {
-        return (new \DateTime($date))->format('Y-m-d H:i:s');
+        return (new \DateTime($date))
+            ->setTimezone(new \DateTimeZone($this->config->get('timezone')))
+            ->format('Y-m-d H:i:s');
     }
 }

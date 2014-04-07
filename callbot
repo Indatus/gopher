@@ -7,7 +7,7 @@ use Indatus\Callbot\Config;
 use Symfony\Component\Console\Application;
 use Indatus\Callbot\Commands\CallMultiCommand;
 use Indatus\Callbot\Commands\CallSingleCommand;
-use Indatus\Callbot\Commands\CallResultsCommand;
+use Indatus\Callbot\Commands\CallDetailsCommand;
 use Indatus\Callbot\Factories\FileStoreFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
 use Indatus\Callbot\Factories\ScriptGeneratorFactory;
@@ -31,7 +31,7 @@ $application->add(
 );
 
 $application->add(
-    new CallResultsCommand(
+    new CallDetailsCommand(
         new CallServiceFactory(new Config),
         new FileStoreFactory(new Config),
         new Config

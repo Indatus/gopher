@@ -60,7 +60,7 @@ class TwilioCallService implements CallServiceInterface
     /**
      * {@inheritDoc}
      */
-    public function getResults($callIds)
+    public function getDetails($callIds)
     {
         $results = array();
 

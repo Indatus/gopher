@@ -32,7 +32,7 @@ class CallMultiCommand extends CallCommand
     {
         $this
             ->setName('call:multi')
-            ->setDescription('Run multiple batches of calls using multiple call scripts')
+            ->setDescription("Run multiple batches of calls, each batch having it's own call script")
             ->addOption('batches', 'b', InputOption::VALUE_REQUIRED, 'Specify which batches to run');
     }
 
@@ -75,11 +75,11 @@ class CallMultiCommand extends CallCommand
 
         if (!empty($this->callIds)) {
 
-            $results = $this->callService->getResults($this->callIds);
+            $results = $this->callService->getDetails($this->callIds);
 
             if (!empty($results)) {
 
-                $table = $this->buildResultsTable($results);
+                $table = $this->buildDetailsTable($results);
 
                 $table->render($output);
 

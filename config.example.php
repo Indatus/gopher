@@ -29,10 +29,12 @@ return [
         'credentials' => [
             'accessKey' => 'XXXXXXXXXXXXXXXXX',
             'secretKey' => 'XXXXXXXXXXXXXXXXX'
-        ]
+        ],
 
         'uploadDir' => 'https://s3.amazonaws.com/BUCKET_NAME'
 
-    ]
+    ],
+
+    'timezone' => 'America/New_York'
 
 ];

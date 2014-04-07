@@ -20,7 +20,7 @@ interface CallServiceInterface
      *
      * @return array
      */
-    public function getResults($callIds);
+    public function getDetails($callIds);
 
     /**
      * Get an array of filtered call detail objects
