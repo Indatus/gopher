@@ -7,6 +7,16 @@ A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a s
 1. `$ git clone git@gitlab.indatus.com:jarstingstall/callbot.git`
 2. `$ cd callbot && composer install`
 
+## Available Commands
+
+| Command Name | Description                                                           |
+| ------------ | --------------------------------------------------------------------- |
+| call:single  | Run a single batch of calls that share the same call script           |
+| call:multi   | Run multiple batches of calls, each batch having it's own call script |
+| call:results | Fetch and display details of outgoing calls                           |
+
+See below for further description and examples of these commands.
+
 ## Make An Outgoing Call Using Twilio and Amazon S3
 
 ### Twilio Setup
