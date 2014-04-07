@@ -13,8 +13,21 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * This command can be used to run a single batch of calls
+ * that share the same call script.
+ *
+ * Usage:
+ *
+ * $ ./callbot call:single 5551234567,5551234567,5551234567 call-scripts/script.xml
+ */
 class CallSingleCommand extends CallCommand
 {
+    /**
+     * Command configuration
+     *
+     * @return void
+     */
     protected function configure()
     {
         $this
@@ -25,6 +38,14 @@ class CallSingleCommand extends CallCommand
             ->addOption('from', null, InputOption::VALUE_REQUIRED, 'Override default from phone number');
     }
 
+    /**
+     * Execute the command
+     *
+     * @param InputInterface  $input  InputInterface instance
+     * @param OutputInterface $output OutputInterface instance
+     *
+     * @return void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $script = file_get_contents($input->getArgument('path'));
@@ -54,11 +75,24 @@ class CallSingleCommand extends CallCommand
 
             $results = $this->callService->getResults($callIds);
 
-            $this->displayResults($output, $results);
+            if (!empty($results)) {
+
+                $table = $this->buildResultsTable($results);
+
+                $table->render($output);
+
+            }
 
         }
     }
 
+    /**
+     * Get the from phone number for the call
+     *
+     * @param string $overrideFrom From phone number passed in
+     *
+     * @return string
+     */
     protected function getFrom($overrideFrom)
     {
         if ($overrideFrom) {

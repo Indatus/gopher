@@ -7,8 +7,23 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * This command can be used to fetch and display the
+ * results of outgoing calls.
+ *
+ * Usage:
+ *
+ * $ ./callbot call:results --id="UNIQUE_ID_1, UNIQUE_ID_2, UNIQUE_ID_3"
+ *
+ * $. /callbot call:results --after="2014-04-01" --before="2014-04-05" status="completed"
+ */
 class CallResultsCommand extends CallCommand{
 
+    /**
+     * Command configuration
+     *
+     * @return void
+     */
     protected function configure()
     {
         $this
@@ -23,6 +38,14 @@ class CallResultsCommand extends CallCommand{
             ->addOption('status', null , InputOption::VALUE_REQUIRED, 'Get the results for all calls with the provided status');
     }
 
+    /**
+     * Execute the command
+     *
+     * @param InputInterface  $input  InputInterface instance
+     * @param OutputInterface $output OutputInterface instance
+     *
+     * @return void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if ($input->getOption('id')) {
@@ -73,7 +96,9 @@ class CallResultsCommand extends CallCommand{
 
             $results = $this->callService->getFilteredResults();
 
-            $this->displayResults($output, $results);
+            $table = $this->buildResultsTable($results);
+
+            $table->render($output);
         }
     }
 }

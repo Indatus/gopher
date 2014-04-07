@@ -112,3 +112,22 @@ Use the various filter options to filter out the list of results:
 | from   | Only show calls from this phone number.    |
 | status | Only show calls currently in this status. May be `queued`, `ringing`, `in-progress`, `canceled`, `completed`, `failed`, `busy`, or `no-answer`. |
 
+#### Examples
+
+Get results for calls made on **April 5, 2014** from **555-123-4567**
+
+```
+$ ./callbot call:results --on="2014-04-05" --from="5551234567"
+```
+
+Get results for calls made between **7:00 am** and **10:00 am** on **April 5, 2014** with a **completed** status
+
+```
+$ ./callbot call:results --after="2014-04-05 07:00:00" --before="2014-04-05 10:00:00" --status="failed"
+```
+
+Display details for all **failed** calls made to **555-123-4567**
+
+```
+$ ./callbot call:results --status="failed" --to="5551234567"
+```

@@ -7,17 +7,41 @@ use Indatus\Callbot\Config;
 use Indatus\Callbot\Factories\FileStoreFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * The CallCommand class is the parent class that all of the other call
+ * commands extend. Shared methods and properties are stored here.
+ */
 class CallCommand extends Command
 {
+    /**
+     * CallServiceInterface implementation
+     *
+     * @var CallService
+     */
     protected $callService;
+
+    /**
+     * FileStoreInterface implementation
+     *
+     * @var FileStore
+     */
     protected $fileStore;
+
+    /**
+     * Config instance
+     *
+     * @var Indatus\Callbot\Config
+     */
     protected $config;
 
+    /**
+     * Constructor injects factories and creates dependancies
+     *
+     * @param CallServiceFactory $callServiceFactory CallServiceFactory instance
+     * @param FileStoreFactory   $fileStoreFactory   FileStoreFactory instance
+     * @param Config             $config             Config instance
+     */
     public function __construct(
         CallServiceFactory $callServiceFactory,
         FileStoreFactory $fileStoreFactory,
@@ -29,20 +53,13 @@ class CallCommand extends Command
         parent::__construct();
     }
 
-    protected function generateScript($batch)
-    {
-        if (array_key_exists('message', $batch)) {
-
-            $this->generator->parseMessage($batch['message']);
-            return $this->generator->getScript();
-
-        } elseif (array_key_exists('srcFile', $batch)) {
-
-            return file_get_contents($batch['srcFile']);
-
-        }
-    }
-
+    /**
+     * Upload a script to a remote file store
+     *
+     * @param string $script Content to upload
+     *
+     * @return boolean
+     */
     protected function uploadScript($script)
     {
         if (!is_null($script) || $script !== false) {
@@ -54,23 +71,26 @@ class CallCommand extends Command
         }
     }
 
-    protected function displayResults($output, $results)
+    /**
+     * Display the results of multiple calls
+     *
+     * @param array $results Array of call result objects
+     *
+     * @return Symfony\Component\Console\Output\OutputInterface
+     */
+    protected function buildResultsTable($results)
     {
         $table = $this->getHelperSet()->get('table');
 
-        $table->setHeaders(['Date\Time', 'Call SID', 'From', 'To', 'Status']);
+        $table->setHeaders(['Date\Time', 'Call ID', 'From', 'To', 'Status']);
 
         $rows = array();
 
-        if (!empty($results)) {
+        foreach ($results as $call) {
 
-            foreach ($results as $call) {
+            $dateTime = $this->formatDate($call->start_time);
 
-                $dateTime = $this->formatDate($call->start_time);
-
-                $rows[] = [$dateTime, $call->sid, $call->from_formatted, $call->to_formatted, $call->status];
-
-            }
+            $rows[] = [$dateTime, $call->sid, $call->from_formatted, $call->to_formatted, $call->status];
 
         }
 
@@ -80,9 +100,16 @@ class CallCommand extends Command
 
         }
 
-        $table->render($output);
+        return $table;
     }
 
+    /**
+     * Format the date for display
+     *
+     * @param string $date Date string to format
+     *
+     * @return DateTime
+     */
     protected function formatDate($date)
     {
         return (new \DateTime($date))->format('Y-m-d H:i:s');
