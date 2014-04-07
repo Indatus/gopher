@@ -2,13 +2,7 @@
 
 return [
 
-    'batches' => [
-        [
-            'to' => ['5551234567', '5551234567', '5551234567'],
-            'script' => 'call-scripts/test-script.xml'
-        ]
-    ],
-
+    // Call Service settings
     'callService' => [
 
         'driver' => 'twilio',
@@ -22,6 +16,7 @@ return [
 
     ],
 
+    // File Store settings
     'fileStore' => [
 
         'driver' => 'S3',
@@ -35,6 +30,14 @@ return [
 
     ],
 
-    'timezone' => 'America/New_York'
+    // Default timezone
+    'timezone' => 'America/New_York',
 
+    // Configured batches of calls
+    'batches' => [
+        [
+            'to' => ['5551234567', '5551234567', '5551234567'],
+            'script' => 'call-scripts/test-script.xml'
+        ]
+    ]
 ];

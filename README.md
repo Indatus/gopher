@@ -37,7 +37,7 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 3. Open `config.php` and enter your Access Key and Secret Key in the `credentials` array.
 4. Locate the `uploadDir` element and replace BUCKET_NAME with the name of the bucket you created in Step 2.
 
-
+> Before running any calls be sure to update the `timezone` value with your preferred timezone. Select from PHP's supported timezone list [here](http://www.php.net/manual/en/timezones.php).
 ---
 
 ### Run a Single Batch of Calls
