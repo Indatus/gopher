@@ -44,9 +44,7 @@ We're now ready for Callbot to place the call for us. Run the `callbot` executab
 $ ./callbot call:single 5551234567 call-scripts/test-script.xml
 ```
 
-The default call script is located in the `call-scripts` directory and contains TwiML (Twilio Markup Language) that tells Twilio how to handle the outgoing call. Check out the Twilio docs for more info on [TwiML](https://www.twilio.com/docs/api/twiml).
-
-`call:single` uses the phone number you provided in `congig.php` in `callServices.defaultFrom` for the default from number. You can override the default from number by passing the `from` option:
+`call:single` uses the default from phone number you provided in `congig.php`. You can override the default from number by passing the `from` option:
 
 ```
 $ ./callbot call:single 5551234567 call-scripts/test-script.xml --from="5551234567"
@@ -57,6 +55,11 @@ You can also pass a comma separated list of phone numbers as the first argument 
 ```
 $ ./callbot call:single 5551234567,5551234561,5551234562 call-scripts/test-script.xml
 ```
+
+> The root-level `call-scripts` directory is used to store your call scripts. An example script is provided to
+> get you up and running quickly. The example script contains TwiML (Twilio Markup Language) that tells Twilio
+> how to handle the outgoing call. Feel free to modify `test-script.xml` and create your own call scripts.
+> Check out the Twilio docs for more info on [TwiML](https://www.twilio.com/docs/api/twiml).
 
 ## Run Multiple Batches of Calls
 
