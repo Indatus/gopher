@@ -36,6 +36,12 @@ $ ./callbot call:single 5551234567 call-scripts/test-script.xml
 
 The default call script is located in the `call-scripts` directory and contains TwiML (Twilio Markup Language) that tells Twilio how to handle the outgoing call. Check out the Twilio docs for more info on [TwiML](https://www.twilio.com/docs/api/twiml).
 
+`call:single` uses the phone number you provided in `congig.php` in `callServices.defaultFrom` for the default from number. You can override the default from number by passing the `from` option:
+
+```
+$ ./callbot call:single 5551234567 call-scripts/test-script.xml --from="5551234567"
+```
+
 * You can also pass a comma separated list of phone numbers as the first argument to the `call:single` command to make multiple calls using the same call-script:
 
 ```

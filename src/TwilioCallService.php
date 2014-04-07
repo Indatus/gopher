@@ -50,19 +50,6 @@ class TwilioCallService implements CallServiceInterface
         return $results;
     }
 
-    public function getRange($range)
-    {
-        if (count($range) == 1) {
-
-            $results = $this->twilio->account->calls->getIterator(0, 50, array(
-                "StartTime>" => $range[0]
-            ));
-
-        }
-
-        return $results;
-    }
-
     public function getFilteredResults()
     {
 
