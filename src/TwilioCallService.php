@@ -8,6 +8,10 @@ use Indatus\Callbot\Contracts\CallServiceInterface;
 
 class TwilioCallService implements CallServiceInterface
 {
+    protected $filters = array();
+    protected $twilio;
+    protected $config;
+
     public function __construct(Services_Twilio $twilio, Config $config)
     {
         $this->twilio = $twilio;
@@ -55,5 +59,51 @@ class TwilioCallService implements CallServiceInterface
         }
 
         return $results;
+    }
+
+    public function getFilteredResults()
+    {
+
+        if (empty($this->filters)) {
+
+            throw new \Exception('No filters provided');
+
+        }
+
+        return $this->twilio->account->calls->getIterator(0, 50, $this->filters);
+
+    }
+
+    public function addFilter($type, $value)
+    {
+        switch ($type) {
+            case 'after':
+                $this->filters['StartTime>'] = $value;
+                break;
+
+            case 'before':
+                $this->filters['StartTime<'] = $value;
+                break;
+
+            case 'on':
+                $this->filters['StartTime'] = $value;
+                break;
+
+            case 'to':
+                $this->filters['To'] = $value;
+                break;
+
+            case 'from':
+                $this->filters['From'] = $value;
+                break;
+
+            case 'status':
+                $this->filters['Status'] = $value;
+                break;
+
+            default:
+                throw new \InvalidArgumentException('Invalid filter type provided.');
+                break;
+        }
     }
 }

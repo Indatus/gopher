@@ -6,12 +6,13 @@ require "vendor/autoload.php";
 use Indatus\Callbot\Config;
 use Indatus\Callbot\Commands\CallSingleCommand;
 use Symfony\Component\Console\Application;
-use Indatus\Callbot\Commands\CallStatusCommand;
+use Indatus\Callbot\Commands\CallResultsCommand;
 use Indatus\Callbot\Factories\FileStoreFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
 use Indatus\Callbot\Factories\ScriptGeneratorFactory;
 
 $application = new Application;
+
 $application->add(
     new CallSingleCommand(
         new CallServiceFactory(new Config),
@@ -22,11 +23,12 @@ $application->add(
 );
 
 $application->add(
-    new CallStatusCommand(
+    new CallResultsCommand(
         new CallServiceFactory(new Config),
         new FileStoreFactory(new Config),
         new ScriptGeneratorFactory,
         new Config
     )
 );
+
 $application->run();
