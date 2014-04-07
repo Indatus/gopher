@@ -27,7 +27,7 @@ interface CallServiceInterface
      *
      * @return array
      */
-    public function getFilteredResults();
+    public function getFilteredDetails();
 
     /**
      * Add a filter to the filters array

@@ -76,7 +76,7 @@ class TwilioCallService implements CallServiceInterface
     /**
      * {@inheritDoc}
      */
-    public function getFilteredResults()
+    public function getFilteredDetails()
     {
 
         if (empty($this->filters)) {
@@ -96,14 +96,17 @@ class TwilioCallService implements CallServiceInterface
     {
         switch ($type) {
             case 'after':
-                $this->filters['StartTime>'] = $value;
+                $date = $this->convertToUTC($value);
+                $this->filters['StartTime>'] = $date;
                 break;
 
             case 'before':
+                $date = $this->convertToUTC($value);
                 $this->filters['StartTime<'] = $value;
                 break;
 
             case 'on':
+                $date = $this->convertToUTC($value);
                 $this->filters['StartTime'] = $value;
                 break;
 
@@ -123,5 +126,19 @@ class TwilioCallService implements CallServiceInterface
                 throw new \InvalidArgumentException('Invalid filter type provided.');
                 break;
         }
+    }
+
+    /**
+     * Convert timestamps to UTC before making API request
+     * @param  [type] $date [description]
+     * @return [type]       [description]
+     */
+    protected function convertToUTC($date)
+    {
+        $dateTime = new \DateTime($date, new \DateTimeZone($this->config->get('timezone')));
+
+        $offsetHours = $dateTime->format('P');
+
+        return $dateTime->modify($offsetHours)->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d H:i:s');
     }
 }
