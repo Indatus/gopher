@@ -129,7 +129,7 @@ $ ./callbot call:details --id="UNIQUE_ID"
 You can specify multiple unique ids with the `id` option.
 
 ```
-$ ./callbot call:details --id="UNIQUE_ID_1, UNIQUE_ID_2, UNIQUE_ID_3"
+$ ./callbot call:details --id="UNIQUE_ID_1,UNIQUE_ID_2,UNIQUE_ID_3"
 ```
 
 ### Using Filters to Narrow Call Details
