@@ -22,8 +22,7 @@ class CallSingleCommand extends CallCommand
             ->setDescription('Make a single call')
             ->addArgument('numbers', InputArgument::REQUIRED, 'Comma separated list of phone numbers to call')
             ->addArgument('path', InputArgument::REQUIRED, 'Path to call script')
-            ->addOption('from', null, InputOption::VALUE_REQUIRED, 'Override default from phone number')
-            ->addOption('batches', 'b', InputOption::VALUE_REQUIRED, 'Specify which batches to run');
+            ->addOption('from', null, InputOption::VALUE_REQUIRED, 'Override default from phone number');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

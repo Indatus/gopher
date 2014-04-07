@@ -5,7 +5,7 @@ return [
     'batches' => [
         [
             'to' => ['5551234567', '5551234567', '5551234567'],
-            'srcFile' => 'call-scripts/test-script.xml'
+            'script' => 'call-scripts/test-script.xml'
         ]
     ],
 
