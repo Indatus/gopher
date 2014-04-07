@@ -14,7 +14,7 @@ class CallResultsCommand extends CallCommand{
         $this
             ->setName('call:results')
             ->setDescription('Get the results of outgoing calls')
-            ->addOption('sid', null , InputOption::VALUE_REQUIRED, 'Get the results for calls with the specified SIDs')
+            ->addOption('id', null , InputOption::VALUE_REQUIRED, 'Get the results for calls with the specified IDs')
             ->addOption('after', null , InputOption::VALUE_REQUIRED, 'Get the results for all calls placed after the provided date')
             ->addOption('before', null , InputOption::VALUE_REQUIRED, 'Get the results for all calls placed before the provided date')
             ->addOption('on', null , InputOption::VALUE_REQUIRED, 'Get the results for all calls placed on the provided date')
@@ -25,9 +25,9 @@ class CallResultsCommand extends CallCommand{
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($input->getOption('sid')) {
+        if ($input->getOption('id')) {
 
-            $callIds = explode(',', $input->getOption('sid'));
+            $callIds = explode(',', $input->getOption('id'));
 
             $results = $this->callService->getResults($callIds);
 

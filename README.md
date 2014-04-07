@@ -25,14 +25,41 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 
 ### Make The Call
 
-We're now ready for Callbot to place the call for us. Run the `callbot` executable, passing in the `call` command. To place a single call, the `call` command requires two arguments:
+We're now ready for Callbot to place the call for us. Run the `callbot` executable, passing in the `call:single` command. To place a single call, the `call:single` command requires two arguments:
 
 1. The phone number to call
 2. The path to the call script
 
 ```
-$ ./callbot call 5551234567 call-scripts/test-script.xml
+$ ./callbot call:single 5551234567 call-scripts/test-script.xml
 ```
 
 The default call script is located in the `call-scripts` directory and contains TwiML (Twilio Markup Language) that tells Twilio how to handle the outgoing call. Check out the Twilio docs for more info on [TwiML](https://www.twilio.com/docs/api/twiml).
+
+## Display Results of Outgoing Calls
+
+The `call:results` command can be used to display the results of outgoing calls.
+
+* Display the results of a specific call with the `id` option:
+
+```
+$ ./callbot call:results --id="UNIQUE_ID"
+```
+
+* You can specify multiple unique ids with the `id` option.
+
+```
+$ ./callbot call:results --id="UNIQUE_ID_1, UNIQUE_ID_2, UNIQUE_ID_3"
+```
+
+Use the various filter options to filter out the list of results:
+
+| Option | Description                               |
+| ------ | ----------------------------------------- |
+| after  | Only show calls placed after this date. (`Y-m-d H:i:s` format)   |
+| before | Only show calls placed before this date. (`Y-m-d H:i:s` format)  |
+| on     | Only show calls calls placed on this date. (`Y-m-d` format)|
+| to     | Only show calls to this phone number.      |
+| from   | Only show calls from this phone number.    |
+| status | Only show calls currently in this status. May be `queued`, `ringing`, `in-progress`, `canceled`, `completed`, `failed`, `busy`, or `no-answer`. |
 
