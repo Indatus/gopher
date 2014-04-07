@@ -114,7 +114,9 @@ You can specify multiple unique ids with the `id` option.
 $ ./callbot call:results --id="UNIQUE_ID_1, UNIQUE_ID_2, UNIQUE_ID_3"
 ```
 
-Use the various filter options to filter out the list of results:
+### Using Filters to Narrow Call Results
+
+#### Available Filters
 
 | Option | Description                               |
 | ------ | ----------------------------------------- |
