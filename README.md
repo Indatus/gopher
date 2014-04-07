@@ -17,9 +17,10 @@ A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a s
 
 See below for further description and examples of these commands.
 
+
 ---
 
-## Make An Outgoing Call Using Twilio and Amazon S3
+## Twilio and Amazon S3 Configuration
 
 ### Twilio Setup
 
@@ -35,7 +36,10 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 2. Create a bucket and give Everyone "View" permissions in the S3 console.
 3. Open `config.php` and enter your Access Key, Secret Key, and Bucket Name.
 
-### Make The Call
+
+---
+
+### Run a Single Batch of Calls
 
 We're now ready for Callbot to place the call for us. Run the `callbot` executable, passing in the `call:single` command. To place a single call, the `call:single` command requires two arguments:
 
@@ -62,6 +66,7 @@ $ ./callbot call:single 5551234567,5551234561,5551234562 call-scripts/test-scrip
 > get you up and running quickly. The example script contains TwiML (Twilio Markup Language) that tells Twilio
 > how to handle the outgoing call. Feel free to modify `test-script.xml` and create your own call scripts.
 > Check out the Twilio docs for more info on [TwiML](https://www.twilio.com/docs/api/twiml).
+
 
 ---
 
@@ -101,6 +106,7 @@ Add as many batches as you'd like to the `batches` array and then run:
 ```
 $ ./callbot call:multi
 ```
+
 
 ---
 
