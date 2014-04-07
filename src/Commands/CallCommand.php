@@ -6,7 +6,6 @@ use DateTime;
 use Indatus\Callbot\Config;
 use Indatus\Callbot\Factories\FileStoreFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
-use Indatus\Callbot\Factories\ScriptGeneratorFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,38 +17,16 @@ class CallCommand extends Command
     protected $callService;
     protected $fileStore;
     protected $config;
-    protected $outgoingCalls = array();
 
     public function __construct(
         CallServiceFactory $callServiceFactory,
         FileStoreFactory $fileStoreFactory,
-        ScriptGeneratorFactory $scriptGeneratorFactory,
         Config $config
     ) {
         $this->callService = $callServiceFactory->make($config->get('callService.driver'));
         $this->fileStore = $fileStoreFactory->make($config->get('fileStore.driver'));
-        $this->generator = $scriptGeneratorFactory->make($config->get('callService.driver'));
         $this->config = $config;
         parent::__construct();
-    }
-
-    protected function setBatchesToRun($input)
-    {
-        $allBatches = $this->config->get('batches');
-
-        if ($batches = $input->getOption('batches')) {
-
-            $numbers = explode(',', $batches);
-
-            foreach ($numbers as $number) {
-                $this->batchesToRun[] = $allBatches[$number - 1];
-            }
-
-        } else {
-
-            $this->batchesToRun = $allBatches;
-
-        }
     }
 
     protected function generateScript($batch)

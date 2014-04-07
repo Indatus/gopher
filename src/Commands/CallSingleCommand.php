@@ -59,49 +59,6 @@ class CallSingleCommand extends CallCommand
 
         }
     }
-            // $this->setBatchesToRun($input);
-
-            // foreach ($this->batchesToRun as $batch) {
-
-            //     $script = $this->generateScript($batch);
-
-            //     if (!$this->uploadScript($script)) {
-
-            //         $output->writeln('<error>Failed to upload script.</error>');
-            //         die;
-
-            //     }
-
-            //     foreach ($batch['to'] as $toNumber) {
-
-            //         if (array_key_exists('from', $batch)) {
-
-            //             $from = $batch['from'];
-
-            //         } else {
-
-            //             $from = $this->config->get('callService.defaultFrom');
-
-            //         }
-
-            //         $call = $this->callService->call(
-            //             $from,
-            //             $toNumber,
-            //             $this->uploadName
-            //         );
-
-            //         $this->outgoingCalls[] = $call->sid;
-
-            //     }
-
-            // }
-
-            // if (!empty($this->outgoingCalls)) {
-
-            //     $this->displayResults($output);
-
-            // }
-
 
     protected function getFrom($overrideFrom)
     {
