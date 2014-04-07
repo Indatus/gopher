@@ -42,7 +42,7 @@ The default call script is located in the `call-scripts` directory and contains 
 $ ./callbot call:single 5551234567 call-scripts/test-script.xml --from="5551234567"
 ```
 
-* You can also pass a comma separated list of phone numbers as the first argument to the `call:single` command to make multiple calls using the same call-script:
+You can also pass a comma separated list of phone numbers as the first argument to the `call:single` command to make multiple calls using the same call-script:
 
 ```
 $ ./callbot call:single 5551234567,5551234561,5551234562 call-scripts/test-script.xml
@@ -54,7 +54,7 @@ The `call:multi` command can be used to run multiple batches of calls, each batc
 
 #### Setup
 
-* Open `config.php` and located the `batches` array. You'll see an example batch:
+Open `config.php` and located the `batches` array. You'll see an example batch:
 
 ```
 'batches' => [
@@ -67,7 +67,7 @@ The `call:multi` command can be used to run multiple batches of calls, each batc
 
 A batch has two required elements: `to` and `script`. `to` is an array of phone numbers to call and `script` is the local path to the call script to use for the batch.
 
-`call:single` uses the phone number you provided in `congig.php` in `callServices.defaultFrom` for the default from number. You can override the default from number by including a `from` element with the batch:
+`call:multi` uses the phone number you provided in `congig.php` in `callServices.defaultFrom` for the default from number. You can override the default from number by including a `from` element with the batch:
 
 ```
 'batches' => [
@@ -79,7 +79,7 @@ A batch has two required elements: `to` and `script`. `to` is an array of phone 
 ]
 ```
 
-* Add as many batches as you'd like to the `batches` array and then run:
+Add as many batches as you'd like to the `batches` array and then run:
 
 ```
 $ ./callbot call:multi
@@ -89,13 +89,13 @@ $ ./callbot call:multi
 
 The `call:results` command can be used to display the results of outgoing calls.
 
-* Display the results of a specific call with the `id` option:
+Display the results of a specific call with the `id` option:
 
 ```
 $ ./callbot call:results --id="UNIQUE_ID"
 ```
 
-* You can specify multiple unique ids with the `id` option.
+You can specify multiple unique ids with the `id` option.
 
 ```
 $ ./callbot call:results --id="UNIQUE_ID_1, UNIQUE_ID_2, UNIQUE_ID_3"
