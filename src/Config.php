@@ -17,7 +17,7 @@ class Config
      */
     public function __construct()
     {
-        $this->config = require 'config.php';
+        $this->config = require __DIR__ . '/../config.php';
     }
 
     /**
