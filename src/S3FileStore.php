@@ -41,7 +41,9 @@ class S3FileStore implements FileStoreInterface
      */
     public function put($script, $fileName)
     {
-        $bucket = end(explode('/', $this->config->get('fileStore.uploadDir')));
+        $parts = explode('/', $this->config->get('fileStore.uploadDir'));
+
+        $bucket = end($parts);
 
         return $this->s3->putObject(
             $script,
