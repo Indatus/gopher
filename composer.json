@@ -16,6 +16,9 @@
             "Indatus\\Callbot\\": "src/"
         }
     },
+    "bin": [
+        "callbot"
+    ],
     "license": "MIT",
     "authors": [
         {

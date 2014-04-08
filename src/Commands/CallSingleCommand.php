@@ -48,9 +48,13 @@ class CallSingleCommand extends CallCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $script = file_get_contents($input->getArgument('path'));
+        $path = $input->getArgument('path');
 
-        if (!$this->uploadScript($script)) {
+        $script = file_get_contents($path);
+
+        $filename = $this->getFileName($path);
+
+        if (!$this->uploadScript($script, $filename)) {
 
             $output->writeln('<error>Failed to upload script.</error>');
             die;

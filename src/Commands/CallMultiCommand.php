@@ -52,7 +52,9 @@ class CallMultiCommand extends CallCommand
 
             $script = file_get_contents($batch['script']);
 
-            if (!$this->uploadScript($script)) {
+            $filename = $this->getFileName($batch['script']);
+
+            if (!$this->uploadScript($script, $filename)) {
 
                 $output->writeln('<error>Failed to upload script.</error>');
                 die;

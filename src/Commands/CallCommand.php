@@ -60,11 +60,11 @@ class CallCommand extends Command
      *
      * @return boolean
      */
-    protected function uploadScript($script)
+    protected function uploadScript($script, $filename)
     {
         if (!is_null($script) || $script !== false) {
 
-            $this->uploadName = time() . '.xml';
+            $this->uploadName = $filename;
 
             return $this->fileStore->put($script, $this->uploadName);
 
@@ -82,7 +82,9 @@ class CallCommand extends Command
     {
         $table = $this->getHelperSet()->get('table');
 
-        $table->setHeaders(['Start Time', 'End Time', 'From', 'To', 'Status','Call ID']);
+        $table->setHeaders(
+            ['Start Time', 'End Time', 'From', 'To', 'Status','Call ID']
+        );
 
         $rows = array();
 
@@ -123,5 +125,19 @@ class CallCommand extends Command
         return (new \DateTime($date))
             ->setTimezone(new \DateTimeZone($this->config->get('timezone')))
             ->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * Get a file name from a path
+     *
+     * @param string $path Path to a file
+     *
+     * @return string
+     */
+    protected function getFileName($path)
+    {
+        $parts = explode('/', $path);
+
+        return end($parts);
     }
 }
