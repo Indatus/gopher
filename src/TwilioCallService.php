@@ -79,12 +79,6 @@ class TwilioCallService implements CallServiceInterface
     public function getFilteredDetails()
     {
 
-        if (empty($this->filters)) {
-
-            throw new \Exception('No filters provided');
-
-        }
-
         return $this->twilio->account->calls->getIterator(0, 50, $this->filters);
 
     }
