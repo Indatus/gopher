@@ -44,10 +44,13 @@ class FileStoreFactory
                     'secret' => $this->config->get('fileStore.credentials.secretKey')
                 ]);
 
+                $parts = explode('/', $this->config->get('fileStore.uploadDir'));
+                $bucket = end($parts);
+
                 return new FileSystem(
                     new Adapter(
                         $client,
-                        $this->config->get('fileStore.bucketName')
+                        $bucket
                     )
                 );
 
