@@ -68,4 +68,25 @@ class TwilioCallServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('foo', $results[0]);
     }
+
+    public function testGetFilteredDetails()
+    {
+        $this->twilio->shouldReceive('getSubresources')
+            ->with('account')
+            ->andReturn($this->account);
+
+        $this->account->shouldReceive('getSubresources')
+            ->with('calls')
+            ->andReturn($this->calls);
+
+        $this->calls->shouldReceive('getIterator')
+            ->once()
+            ->with(0, 50, ['To' => '5551234567'])
+            ->andReturn('foo');
+
+        $this->callService->addFilter('to', '5551234567');
+        $results = $this->callService->getFilteredDetails();
+
+        $this->assertEquals('foo', $results);
+    }
 }

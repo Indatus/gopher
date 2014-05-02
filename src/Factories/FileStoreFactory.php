@@ -47,12 +47,7 @@ class FileStoreFactory
                 $parts = explode('/', $this->config->get('fileStore.uploadDir'));
                 $bucket = end($parts);
 
-                return new FileSystem(
-                    new Adapter(
-                        $client,
-                        $bucket
-                    )
-                );
+                return new FileSystem(new Adapter($client, $bucket));
 
                 break;
 
