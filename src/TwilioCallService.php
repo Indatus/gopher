@@ -50,7 +50,7 @@ class TwilioCallService implements CallServiceInterface
         $call = $this->twilio->account->calls->create(
             $from,
             $to,
-            $this->config->get('fileStore.uploadDir') . '/' . $uploadName,
+            $this->config->get('fileStore.uploadUrl') . '/' . $this->config->get('fileStore.bucketName') . '/' . $uploadName,
             array('Method' => 'GET')
         );
 

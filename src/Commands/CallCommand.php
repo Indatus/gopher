@@ -66,7 +66,11 @@ class CallCommand extends Command
 
             $this->uploadName = $filename;
 
-            return $this->fileStore->put($script, $this->uploadName);
+            return $this->fileStore->put(
+                $this->uploadName,
+                $script,
+                ['visibility' => 'public']
+            );
 
         }
     }
