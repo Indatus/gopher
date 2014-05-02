@@ -96,12 +96,12 @@ class TwilioCallService implements CallServiceInterface
 
             case 'before':
                 $date = $this->convertToUTC($value);
-                $this->filters['StartTime<'] = $value;
+                $this->filters['StartTime<'] = $date;
                 break;
 
             case 'on':
                 $date = $this->convertToUTC($value);
-                $this->filters['StartTime'] = $value;
+                $this->filters['StartTime'] = $date;
                 break;
 
             case 'to':
