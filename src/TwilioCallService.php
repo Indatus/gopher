@@ -24,22 +24,13 @@ class TwilioCallService implements CallServiceInterface
     protected $twilio;
 
     /**
-     * Config instance
-     *
-     * @var Indatus\Callbot\Config
-     */
-    protected $config;
-
-    /**
      * Constructor injects dependancies
      *
      * @param Services_Twilio $twilio Services_Twilio instance
-     * @param Config          $config Config instance
      */
-    public function __construct(Services_Twilio $twilio, Config $config)
+    public function __construct(Services_Twilio $twilio)
     {
         $this->twilio = $twilio;
-        $this->config = $config;
     }
 
     /**
@@ -50,7 +41,7 @@ class TwilioCallService implements CallServiceInterface
         $call = $this->twilio->account->calls->create(
             $from,
             $to,
-            $this->config->get('fileStore.uploadDir') . '/' . $uploadName,
+            Config::get('fileSystem.uploadDir') . '/' . $uploadName,
             array('Method' => 'GET')
         );
 
@@ -129,10 +120,16 @@ class TwilioCallService implements CallServiceInterface
      */
     protected function convertToUTC($date)
     {
-        $dateTime = new \DateTime($date, new \DateTimeZone($this->config->get('timezone')));
+        $dateTime = new \DateTime(
+            $date,
+            new \DateTimeZone(Config::get('timezone'))
+        );
 
         $offsetHours = $dateTime->format('P');
 
-        return $dateTime->modify($offsetHours)->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d H:i:s');
+        return $dateTime
+            ->modify($offsetHours)
+            ->setTimezone(new \DateTimeZone('UTC'))
+            ->format('Y-m-d H:i:s');
     }
 }

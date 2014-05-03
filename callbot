@@ -3,39 +3,25 @@
 
 require "vendor/autoload.php";
 
-use Indatus\Callbot\Config;
 use Symfony\Component\Console\Application;
 use Indatus\Callbot\Commands\CallMultiCommand;
 use Indatus\Callbot\Commands\CallSingleCommand;
 use Indatus\Callbot\Commands\CallDetailsCommand;
-use Indatus\Callbot\Factories\FileStoreFactory;
+use Indatus\Callbot\Factories\FileSystemFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
-use Indatus\Callbot\Factories\ScriptGeneratorFactory;
 
 $application = new Application;
 
 $application->add(
-    new CallSingleCommand(
-        new CallServiceFactory(new Config),
-        new FileStoreFactory(new Config),
-        new Config
-    )
+    new CallSingleCommand(new CallServiceFactory, new FileSystemFactory)
 );
 
 $application->add(
-    new CallMultiCommand(
-        new CallServiceFactory(new Config),
-        new FileStoreFactory(new Config),
-        new Config
-    )
+    new CallMultiCommand(new CallServiceFactory, new FileSystemFactory)
 );
 
 $application->add(
-    new CallDetailsCommand(
-        new CallServiceFactory(new Config),
-        new FileStoreFactory(new Config),
-        new Config
-    )
+    new CallDetailsCommand(new CallServiceFactory, new FileSystemFactory)
 );
 
 $application->run();

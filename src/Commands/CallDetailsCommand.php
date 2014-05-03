@@ -1,8 +1,6 @@
 <?php namespace Indatus\Callbot\Commands;
 
 use Indatus\Callbot\Commands\CallCommand;
-use Indatus\Callbot\Factories\CallServiceFactory;
-use Indatus\Callbot\Config;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

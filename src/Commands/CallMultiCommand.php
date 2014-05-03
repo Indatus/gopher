@@ -1,5 +1,6 @@
 <?php namespace Indatus\Callbot\Commands;
 
+use Indatus\Callbot\Config;
 use Indatus\Callbot\Commands\CallCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -102,7 +103,7 @@ class CallMultiCommand extends CallCommand
      */
     protected function getBatchesToRun($batches)
     {
-        $allBatches = $this->config->get('batches');
+        $allBatches = Config::get('batches');
 
         if ($batches) {
 
@@ -140,6 +141,6 @@ class CallMultiCommand extends CallCommand
 
         }
 
-        return $this->config->get('callService.defaultFrom');
+        return Config::get('callService.defaultFrom');
     }
 }

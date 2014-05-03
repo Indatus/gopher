@@ -1,10 +1,6 @@
 <?php namespace Indatus\Callbot\Commands;
 
-use DateTime;
 use Indatus\Callbot\Config;
-use Indatus\Callbot\Factories\FileStoreFactory;
-use Indatus\Callbot\Factories\CallServiceFactory;
-use Indatus\Callbot\Factories\ScriptGeneratorFactory;
 use Indatus\Callbot\Commands\CallCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -101,6 +97,6 @@ class CallSingleCommand extends CallCommand
             return $overrideFrom;
         }
 
-        return $this->config->get('callService.defaultFrom');
+        return Config::get('callService.defaultFrom');
     }
 }

@@ -36,7 +36,7 @@ class TwilioCallServiceTest extends PHPUnit_Framework_TestCase
 
         $this->config->shouldReceive('get')
             ->once()
-            ->with('fileStore.uploadDir')
+            ->with('fileSystem.uploadDir')
             ->andReturn('http://www.example.com/foo');
 
         $this->calls->shouldReceive('create')

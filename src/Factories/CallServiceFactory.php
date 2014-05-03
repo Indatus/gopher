@@ -10,23 +10,6 @@ use Indatus\Callbot\TwilioCallService;
 class CallServiceFactory
 {
     /**
-     * Config instance
-     *
-     * @var Indatus\Callbot\Config
-     */
-    protected $config;
-
-    /**
-     * Constructor injects dependancies
-     *
-     * @param Config $config Config instance
-     */
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
-    }
-
-    /**
      * Create a CallServiceInterface implementation
      *
      * @param string $driver Driver type
@@ -39,10 +22,9 @@ class CallServiceFactory
             case 'twilio':
                 return new TwilioCallService(
                     new Services_Twilio(
-                        $this->config->get('callService.credentials.accountSid'),
-                        $this->config->get('callService.credentials.authToken')
-                    ),
-                    $this->config
+                        Config::get('callService.credentials.accountSid'),
+                        Config::get('callService.credentials.authToken')
+                    )
                 );
                 break;
 

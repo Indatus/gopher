@@ -16,8 +16,8 @@ return [
 
     ],
 
-    // File Store settings
-    'fileStore' => [
+    // FileSystem settings
+    'fileSystem' => [
 
         'driver' => 'S3',
 

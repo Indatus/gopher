@@ -1,10 +1,7 @@
-<?php
+<?php namespace Indatus\Callbot\Commands;
 
-namespace Indatus\Callbot\Commands;
-
-use DateTime;
 use Indatus\Callbot\Config;
-use Indatus\Callbot\Factories\FileStoreFactory;
+use Indatus\Callbot\Factories\FileSystemFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
 use Symfony\Component\Console\Command\Command;
 
@@ -22,34 +19,24 @@ class CallCommand extends Command
     protected $callService;
 
     /**
-     * FileStoreInterface implementation
+     * FileSystem instance
      *
-     * @var FileStore
+     * @var FileSystem
      */
-    protected $fileStore;
-
-    /**
-     * Config instance
-     *
-     * @var Indatus\Callbot\Config
-     */
-    protected $config;
+    protected $fileSystem;
 
     /**
      * Constructor injects factories and creates dependancies
      *
-     * @param CallServiceFactory $callServiceFactory CallServiceFactory instance
-     * @param FileStoreFactory   $fileStoreFactory   FileStoreFactory instance
-     * @param Config             $config             Config instance
+     * @param CallServiceFactory $callServiceFactory
+     * @param FileSystemFactory  $fileSystemFactory
      */
     public function __construct(
         CallServiceFactory $callServiceFactory,
-        FileStoreFactory $fileStoreFactory,
-        Config $config
+        FileSystemFactory $fileSystemFactory
     ) {
-        $this->callService = $callServiceFactory->make($config->get('callService.driver'));
-        $this->fileStore = $fileStoreFactory->make($config->get('fileStore.driver'));
-        $this->config = $config;
+        $this->callService = $callServiceFactory->make(Config::get('callService.driver'));
+        $this->fileSystem = $fileSystemFactory->make(Config::get('fileSystem.driver'));
         parent::__construct();
     }
 
@@ -66,7 +53,7 @@ class CallCommand extends Command
 
             $this->uploadName = $filename;
 
-            return $this->fileStore->put(
+            return $this->fileSystem->put(
                 $this->uploadName,
                 $script,
                 ['visibility' => 'public']
@@ -127,7 +114,7 @@ class CallCommand extends Command
     protected function formatDate($date)
     {
         return (new \DateTime($date))
-            ->setTimezone(new \DateTimeZone($this->config->get('timezone')))
+            ->setTimezone(new \DateTimeZone(Config::get('timezone')))
             ->format('Y-m-d H:i:s');
     }
 
