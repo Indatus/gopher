@@ -1,6 +1,4 @@
-<?php
-
-namespace Indatus\Callbot\Commands;
+<?php namespace Indatus\Callbot\Commands;
 
 use DateTime;
 use Indatus\Callbot\Config;

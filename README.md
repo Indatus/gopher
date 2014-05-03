@@ -72,7 +72,7 @@ The `call:multi` command can be used to run multiple batches of calls, each batc
 
 #### Setup
 
-Open `config.php` and located the `batches` array. You'll see an example batch:
+Open `config.php` and locate the `batches` array. You'll see an example batch:
 
 ```
 'batches' => [
