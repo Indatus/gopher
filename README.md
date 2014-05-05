@@ -1,6 +1,6 @@
 # Callbot
 
-A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a simple CLI interface for making batches of test calls. It is configured to use Twilio out of the box, but can be configured to use any similar service.
+A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a simple CLI interface for making batches of test calls. It is configured to use Twilio out of the box, but can be configured to use any similar service. Credit to [brainwebb01](https://github.com/brianwebb01) for the original concept for this package.
 
 ## Installation
 
@@ -20,13 +20,14 @@ See below for further description and examples of these commands.
 
 ---
 
-## Twilio and Amazon S3 Configuration
+## Configuration
 
 ### Twilio Setup
 
 1. Signup for a free [Twilio](https://www.twilio.com/try-twilio) account.
-2. Rename `config.example.php` to `config.php` and enter your Account SID and Auth Token credentials.
-3. Replace the `'defaultFrom'` phone number with your Twilio phone number.
+2. Open `config/callservice.php` and fill in your Account SID and Auth Token.
+3. Enter your Twilio number as the default `from` number and update `timezone` with your preferred timezone.
+Select from PHP's supported timezone list [here](http://www.php.net/manual/en/timezones.php).
 
 ### Amazon S3 Setup
 
@@ -34,10 +35,9 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 
 1. Signup for an [Amazon S3](https://console.aws.amazon.com/s3/) account.
 2. Create a bucket and give Everyone "View" permissions in the S3 console.
-3. Open `config.php` and enter your Access Key and Secret Key in the `credentials` array.
-4. Locate the `uploadDir` element and replace BUCKET_NAME with the name of the bucket you created in Step 2.
+3. Open `config/filesystem.php` and locate the `s3` configuration section.
+4. Enter your Access Key, Secret Key, and bucket name.
 
-Before running any calls be sure to update the `timezone` value with your preferred timezone. Select from PHP's supported timezone list [here](http://www.php.net/manual/en/timezones.php).
 
 ---
 
