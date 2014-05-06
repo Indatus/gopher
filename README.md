@@ -2,20 +2,15 @@
 
 A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a simple CLI interface for making batches of test calls. It is configured to use Twilio out of the box, but can be configured to use any similar service. Credit to [brainwebb01](https://github.com/brianwebb01) for the original concept for this package.
 
-## Installation
+## Installation with Composer
 
-1. `$ git clone` this repository
-2. `$ cd callbot && composer install`
+You can install the library via Composer by adding the following line to the require block of your composer.json file:
 
-## Available Commands
+```
+"indatus/callbot": "dev-master"
+```
 
-| Command Name | Description                                                           |
-| ------------ | --------------------------------------------------------------------- |
-| call:single  | Run a single batch of calls that share the same call script           |
-| call:multi   | Run multiple batches of calls, each batch having it's own call script |
-| call:details | Fetch and display details of outgoing calls                           |
-
-See below for further description and examples of these commands.
+Next run `composer install`.
 
 
 ---
@@ -40,6 +35,19 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 
 
 ---
+
+## Available Commands
+
+| Command Name | Description                                                           |
+| ------------ | --------------------------------------------------------------------- |
+| call:single  | Run a single batch of calls that share the same call script           |
+| call:multi   | Run multiple batches of calls, each batch having it's own call script |
+| call:details | Fetch and display details of outgoing calls                           |
+
+See below for further description and examples of these commands.
+
+---
+
 
 ### Run a Single Batch of Calls
 
@@ -66,7 +74,7 @@ $ ./callbot call:single 5551234567 call-scripts/test-script.xml --from="55512345
 
 ---
 
-## Run Multiple Batches of Calls
+### Run Multiple Batches of Calls
 
 The `call:multi` command can be used to run multiple batches of calls, each batch having it's own call script.
 
@@ -105,7 +113,7 @@ Add as many batches as you'd like to the `batches` array and then run:
 $ ./callbot call:multi
 ```
 
-### Run Specific Batches
+#### Run Specific Batches
 
 You can pass a comma-separated list of batch names to `call:multi` to specify which specific
 batches to run. Make sure to give your batches unique names if you want to use this feature.
@@ -116,7 +124,7 @@ $./callbot call:multi example-1,example-2
 
 ---
 
-## Display Details of Outgoing Calls
+### Display Details of Outgoing Calls
 
 The `call:details` command can be used to display the details of outgoing calls.
 
