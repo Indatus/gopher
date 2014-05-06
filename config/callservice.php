@@ -24,8 +24,8 @@ return [
 
         'twilio' => [
             'driver' => 'twilio',
-            'sid'    => 'ACf197cc3ae4d026ae2159b6b53eac0d00',
-            'token' => 'cd489df3b58cad9c9ec3dc50c1940961'
+            'sid'    => 'your-account-sid',
+            'token' => 'your-auth-token'
         ]
 
     ],
@@ -37,7 +37,7 @@ return [
     |
     */
 
-    'from' => '5025120678',
+    'from' => null,
 
     /*
     |--------------------------------------------------------------------------

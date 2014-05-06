@@ -24,9 +24,9 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key'    => 'AKIAJA53SRTONA7J7AMQ',
-            'secret' => '6cq/bAKSqUDBsM1egKzvhgiJ+X3PDJ3bwDbJwp21',
-            'bucket' => 'com.indatus.callbot-bucket'
+            'key'    => 'your-access-key',
+            'secret' => 'your-secret-key',
+            'bucket' => 'your-bucket-name'
         ]
 
     ]
