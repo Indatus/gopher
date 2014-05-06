@@ -72,7 +72,7 @@ The `call:multi` command can be used to run multiple batches of calls, each batc
 
 #### Setup
 
-Open `config.php` and locate the `batches` array. You'll see an example batch:
+Open `batches.php` and look at the example batch provided:
 
 ```
 'batches' => [
@@ -86,7 +86,7 @@ Open `config.php` and locate the `batches` array. You'll see an example batch:
 
 A batch has two required elements: `to` and `script`. `to` is an array of phone numbers to call and `script` is the local path to the call script to use for the batch.
 
-`call:multi` uses the default from phone number you provided in `congig.php`. You can override the default from number by including a `from` element with the batch:
+`call:multi` uses the default from phone number you provided in `callservice.php`. You can override the default from number by including a `from` element with the batch:
 
 ```
 'batches' => [
