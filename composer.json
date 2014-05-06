@@ -4,7 +4,6 @@
     "require": {
         "php": ">=5.4",
         "twilio/sdk": "dev-master",
-        "tpyo/amazon-s3-php-class": "dev-master",
         "symfony/console": "2.5.*@dev",
 		"league/flysystem": "0.4.*",
 		"aws/aws-sdk-php": "2.6.*@dev"
@@ -23,10 +22,6 @@
     ],
     "license": "MIT",
     "authors": [
-        {
-            "name": "Brian Webb",
-            "email": "bwebb@indatus.com"
-        },
         {
             "name": "John Arstingstall",
             "email": "jarstingstall@indatus.com"
