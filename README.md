@@ -31,7 +31,7 @@ Select from PHP's supported timezone list [here](http://www.php.net/manual/en/ti
 
 ### Amazon S3 Setup
 
-Twilio requires an XML script located at a public URL for each call it makes. The script at this URL tells Twilio what to do once the call is answered. Callbot is configured to push your scripts up to an Amazon S3 bucket out of the box. Signing up for Amazon S3 is free:
+Twilio requires an XML script located at a public URL for each call it makes. The script at this URL tells Twilio what to do once the call is answered. Callbot is configured to push your scripts up to an Amazon S3 bucket out of the box.
 
 1. Signup for an [Amazon S3](https://console.aws.amazon.com/s3/) account.
 2. Create a bucket and give Everyone "View" permissions in the S3 console.

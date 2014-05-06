@@ -57,7 +57,7 @@ class CallSingleCommand extends CallCommand
 
         $numbers = explode(',', $input->getArgument('numbers'));
 
-        $from = $this->getFrom($input->getOption('from'));
+        $from = $input->getOption('from') ?: Config::get('callservice.from');
 
         foreach ($numbers as $to) {
 
@@ -82,21 +82,5 @@ class CallSingleCommand extends CallCommand
             }
 
         }
-    }
-
-    /**
-     * Get the from phone number for the call
-     *
-     * @param string $overrideFrom From phone number passed in
-     *
-     * @return string
-     */
-    protected function getFrom($overrideFrom)
-    {
-        if ($overrideFrom) {
-            return $overrideFrom;
-        }
-
-        return Config::get('callservice.from');
     }
 }
