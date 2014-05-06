@@ -34,14 +34,9 @@ class TwilioCallServiceTest extends PHPUnit_Framework_TestCase
             ->with('calls')
             ->andReturn($this->calls);
 
-        $this->config->shouldReceive('get')
-            ->once()
-            ->with('fileSystem.uploadDir')
-            ->andReturn('http://www.example.com/foo');
-
         $this->calls->shouldReceive('create')
             ->once()
-            ->with('5551234567', '5551234567', 'http://www.example.com/foo/foo.xml', array('Method' => 'GET'))
+            ->with('5551234567', '5551234567', 'https://s3.amazonaws.com/your-bucket-name/foo.xml', array('Method' => 'GET'))
             ->andReturn($callResult);
 
         $callId = $this->callService->call('5551234567', '5551234567', 'foo.xml');
