@@ -4,7 +4,7 @@ A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a s
 
 ## Installation
 
-1. `$ git clone git@gitlab.indatus.com:jarstingstall/callbot.git`
+1. `$ git clone` this repository
 2. `$ cd callbot && composer install`
 
 ## Available Commands
