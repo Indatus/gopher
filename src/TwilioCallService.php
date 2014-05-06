@@ -115,8 +115,10 @@ class TwilioCallService implements CallServiceInterface
 
     /**
      * Convert timestamps to UTC before making API request
-     * @param  [type] $date [description]
-     * @return [type]       [description]
+     *
+     * @param  string $date
+     *
+     * @return string
      */
     protected function convertToUTC($date)
     {

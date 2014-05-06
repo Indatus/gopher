@@ -37,6 +37,14 @@ class Config
         }
     }
 
+    /**
+     * Get a default connection array
+     *
+     * @param  string $file
+     * @param  string $default
+     *
+     * @return array
+     */
     public static function getConnection($file, $default)
     {
         $connections = static::get($file . '.connections');
@@ -44,6 +52,11 @@ class Config
         return $connections[$default];
     }
 
+    /**
+     * Get the remote filesystem directory
+     *
+     * @return string
+     */
     public static function getRemoteDir()
     {
         $connection = static::getConnection('filesystem', static::get('filesystem.default'));
