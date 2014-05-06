@@ -12,24 +12,26 @@ class CallServiceFactory
     /**
      * Create a CallServiceInterface implementation
      *
-     * @param string $driver Driver type
+     * @param string $default
      *
      * @return CallServiceInterface
      */
-    public function make($driver)
+    public function make($default)
     {
-        switch ($driver) {
+        $connection = Config::getConnection('callservice', $default);
+
+        switch ($connection['driver']) {
             case 'twilio':
                 return new TwilioCallService(
                     new Services_Twilio(
-                        Config::get('callService.credentials.accountSid'),
-                        Config::get('callService.credentials.authToken')
+                        $connection['sid'],
+                        $connection['token']
                     )
                 );
                 break;
 
             default:
-                throw new \InvalidArgumentException;
+                throw new \InvalidArgumentException('Unsupported driver provided');
                 break;
         }
     }

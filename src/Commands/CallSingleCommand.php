@@ -97,6 +97,6 @@ class CallSingleCommand extends CallCommand
             return $overrideFrom;
         }
 
-        return Config::get('callService.defaultFrom');
+        return Config::get('callservice.from');
     }
 }

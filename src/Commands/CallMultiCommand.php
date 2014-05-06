@@ -141,6 +141,6 @@ class CallMultiCommand extends CallCommand
 
         }
 
-        return Config::get('callService.defaultFrom');
+        return Config::get('callservice.from');
     }
 }

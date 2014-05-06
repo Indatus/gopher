@@ -13,22 +13,23 @@ class FileSystemFactory
     /**
      * Create a FileSystem instance
      *
-     * @param string $driver
+     * @param string $default
      *
      * @return FileSystem
      */
-    public function make($driver)
+    public function make($default)
     {
-        switch ($driver) {
-            case 'S3':
+        $connection = Config::getConnection('filesystem', $default);
+
+        switch ($connection['driver']) {
+            case 's3':
 
                 $client = S3Client::factory([
-                    'key' => Config::get('fileSystem.credentials.accessKey'),
-                    'secret' => Config::get('fileSystem.credentials.secretKey')
+                    'key' => $connection['key'],
+                    'secret' => $connection['secret']
                 ]);
 
-                $parts = explode('/', Config::get('fileSystem.uploadDir'));
-                $bucket = end($parts);
+                $bucket = $connection['bucket'];
 
                 return new FileSystem(new AwsS3($client, $bucket));
                 break;

@@ -41,7 +41,7 @@ class TwilioCallService implements CallServiceInterface
         $call = $this->twilio->account->calls->create(
             $from,
             $to,
-            Config::get('fileSystem.uploadDir') . '/' . $uploadName,
+            Config::getRemoteDir() . $uploadName,
             array('Method' => 'GET')
         );
 
@@ -122,7 +122,7 @@ class TwilioCallService implements CallServiceInterface
     {
         $dateTime = new \DateTime(
             $date,
-            new \DateTimeZone(Config::get('timezone'))
+            new \DateTimeZone(Config::get('callservice.timezone'))
         );
 
         $offsetHours = $dateTime->format('P');

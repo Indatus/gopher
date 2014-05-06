@@ -14,8 +14,11 @@ class Config
      */
     public static function get($key)
     {
-        $config = require __DIR__ . '/../config.php';
         $keys = explode('.', $key);
+        $file = array_shift($keys);
+
+        $config = require __DIR__ . '/../config/' . $file . '.php';
+
         $numKeys = count($keys);
 
         switch ($numKeys) {
@@ -26,11 +29,28 @@ class Config
                 return $config[$keys[0]][$keys[1]];
                 break;
             case 1:
-                return $config[$key];
+                return $config[$keys[0]];
                 break;
             default:
                 return null;
                 break;
+        }
+    }
+
+    public static function getConnection($file, $default)
+    {
+        $connections = static::get($file . '.connections');
+
+        return $connections[$default];
+    }
+
+    public static function getRemoteDir()
+    {
+        $connection = static::getConnection('filesystem', static::get('filesystem.default'));
+
+        switch($connection['driver']) {
+            case 's3':
+                return 'https://s3.amazonaws.com/' . $connection['bucket'] . '/';
         }
     }
 }

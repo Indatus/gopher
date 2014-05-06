@@ -35,8 +35,8 @@ class CallCommand extends Command
         CallServiceFactory $callServiceFactory,
         FileSystemFactory $fileSystemFactory
     ) {
-        $this->callService = $callServiceFactory->make(Config::get('callService.driver'));
-        $this->fileSystem = $fileSystemFactory->make(Config::get('fileSystem.driver'));
+        $this->callService = $callServiceFactory->make(Config::get('callservice.default'));
+        $this->fileSystem = $fileSystemFactory->make(Config::get('filesystem.default'));
         parent::__construct();
     }
 
@@ -114,7 +114,7 @@ class CallCommand extends Command
     protected function formatDate($date)
     {
         return (new \DateTime($date))
-            ->setTimezone(new \DateTimeZone(Config::get('timezone')))
+            ->setTimezone(new \DateTimeZone(Config::get('callservice.timezone')))
             ->format('Y-m-d H:i:s');
     }
 
