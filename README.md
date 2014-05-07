@@ -38,13 +38,15 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 
 ## Usage
 
+The root-level `callbot` executable is used to run three different commands:
+
 | Command Name | Description                                                           |
 | ------------ | --------------------------------------------------------------------- |
 | call:single  | Run a single batch of calls that share the same call script           |
 | call:multi   | Run multiple batches of calls, each batch having it's own call script |
 | call:details | Fetch and display details of outgoing calls                           |
 
-See below for further description and examples of these commands.
+See below for further description and usage examples of each.
 
 ---
 
