@@ -54,7 +54,7 @@ See below for further description and examples of these commands.
 The `call:single` command can be used to run a single batch of calls that share the same call script. It requires two arguments:
 
 1. A comma-separated list of phone numbers to call
-2. The local path to the call script
+2. The local path to the call script relative to the `callbot` executable
 
 ```
 $ ./callbot call:single 5551234567,5551234561,5551234562 call-scripts/test-script.xml
@@ -67,9 +67,10 @@ $ ./callbot call:single 5551234567 call-scripts/test-script.xml --from="55512345
 ```
 
 > The root-level `call-scripts` directory is used to store your call scripts. An example script is provided to
-> get you up and running quickly. The example script contains TwiML (Twilio Markup Language) that tells Twilio
-> how to handle the outgoing call. Feel free to modify `test-script.xml` and create your own call scripts.
-> Check out the Twilio docs for more info on [TwiML](https://www.twilio.com/docs/api/twiml).
+> get you up and running quickly. The example script contains [TwiML](https://www.twilio.com/docs/api/twiml)
+> (Twilio Markup Language) that tells Twilio how to handle the outgoing call. Feel free to modify `test-script.xml`
+> and create your own call scripts. You can store your scripts globally, just be sure the path provided is
+> relative to the `callbot` executable.
 
 
 ---
@@ -119,7 +120,7 @@ You can pass a comma-separated list of batch names to `call:multi` to specify wh
 batches to run. Make sure to give your batches unique names if you want to use this feature.
 
 ```
-$./callbot call:multi example-1,example-2
+$ ./callbot call:multi example-1,example-2
 ```
 
 ---
