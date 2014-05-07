@@ -36,7 +36,7 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 
 ---
 
-## Available Commands
+## Usage
 
 | Command Name | Description                                                           |
 | ------------ | --------------------------------------------------------------------- |
@@ -164,7 +164,7 @@ $ ./callbot call:details --on="2014-04-05" --from="5551234567"
 Get details for calls made between **7:00 am** and **10:00 am** on **April 5, 2014** with a **completed** status
 
 ```
-$ ./callbot call:details --after="2014-04-05 07:00:00" --before="2014-04-05 10:00:00" --status="failed"
+$ ./callbot call:details --after="2014-04-05 07:00:00" --before="2014-04-05 10:00:00" --status="completed"
 ```
 
 Display details for all **failed** calls made to **555-123-4567**
