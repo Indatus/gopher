@@ -131,4 +131,21 @@ class CallCommand extends Command
 
         return end($parts);
     }
+
+    /**
+     * Get the contents of a call script file
+     * only if the file exists
+     *
+     * @param string $path
+     *
+     * @return mixed
+     */
+    protected function getScript($path)
+    {
+        if (file_exists($path)) {
+            return file_get_contents($path);
+        }
+
+        return false;
+    }
 }

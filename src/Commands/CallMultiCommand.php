@@ -51,7 +51,13 @@ class CallMultiCommand extends CallCommand
 
         foreach ($batches as $batch) {
 
-            $script = file_get_contents($batch['script']);
+            if (!$script = $this->getScript($batch['script'])) {
+
+                $path = $batch['script'];
+                $output->writeln("<error>$path is not a valid file</error>");
+                die;
+
+            }
 
             $filename = $this->getFileName($batch['script']);
 
@@ -94,10 +100,10 @@ class CallMultiCommand extends CallCommand
 
     /**
      * Sets the batches to be ran based on what is
-     * present in config.php and what the user passes
-     * to the batches option
+     * present in batches.php and what the user supplies
+     * in the batches argument
      *
-     * @param string $batches Comma separated list of batch numbers
+     * @param string $batches Comma separated list of batch names
      *
      * @return array
      */

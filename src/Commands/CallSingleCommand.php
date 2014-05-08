@@ -44,7 +44,12 @@ class CallSingleCommand extends CallCommand
     {
         $path = $input->getArgument('path');
 
-        $script = file_get_contents($path);
+        if (!$script = $this->getScript($path)) {
+
+            $output->writeln("<error>$path is not a valid file</error>");
+            die;
+
+        }
 
         $filename = $this->getFileName($path);
 
