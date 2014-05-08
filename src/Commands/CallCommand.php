@@ -5,6 +5,7 @@ use Indatus\Callbot\Factories\FileSystemFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
 use Indatus\Callbot\Factories\ResultsHandlerFactory;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * The CallCommand class is the parent class that all of the other call
@@ -49,6 +50,30 @@ class CallCommand extends Command
         $this->resultsHandler = $resultsHandlerFactory->make(Config::get('callservice.default'));
         parent::__construct();
     }
+    /**
+     * Upload the call script to a remote file store
+     *
+     * @param string $path
+     * @param OutputInterface $output
+     *
+     * @return mixed
+     */
+    protected function uploadCallScript($path, OutputInterface $output)
+    {
+        if (!$script = $this->getScript($path)) {
+
+            $output->writeln("<error>$path is not a valid file</error>");
+            return false;
+
+        }
+
+        if (!$this->uploadScript($script, $this->getFileName($path))) {
+
+            $output->writeln('<error>Failed to upload script.</error>');
+            return false;
+
+        }
+    }
 
     /**
      * Upload a script to a remote file store
@@ -70,6 +95,31 @@ class CallCommand extends Command
             );
 
         }
+    }
+
+    /**
+     * Place the calls using the configured call service
+     *
+     * @param array  $numbers
+     * @param string $from
+     *
+     * @return array
+     */
+    protected function placeCalls(array $numbers, $from)
+    {
+        $callIds = [];
+
+        foreach ($numbers as $to) {
+
+            $callIds[] = $this->callService->call(
+                $from,
+                $to,
+                $this->uploadName
+            );
+
+        }
+
+        return $callIds;
     }
 
     /**

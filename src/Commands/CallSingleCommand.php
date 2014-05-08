@@ -42,9 +42,12 @@ class CallSingleCommand extends CallCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->uploadCallScript($input, $output);
+        if (!$this->uploadCallScript($input->getArgument('path'), $output)) die;
 
-        $callIds = $this->placeCalls($input);
+        $callIds = $this->placeCalls(
+            explode(',', $input->getArgument('numbers')),
+            $input->getOption('from') ?: Config::get('callservice.from')
+        );
 
         $results = $this->callService->getDetails($callIds);
 
@@ -56,62 +59,5 @@ class CallSingleCommand extends CallCommand
             );
 
         }
-    }
-
-    /**
-     * Upload the call script to a remote file store
-     *
-     * @param  InputInterface  $input
-     * @param  OutputInterface $output
-     *
-     * @return mixed
-     */
-    protected function uploadCallScript(InputInterface $input, OutputInterface $output)
-    {
-        $path = $input->getArgument('path');
-
-        if (!$script = $this->getScript($path)) {
-
-            $output->writeln("<error>$path is not a valid file</error>");
-            die;
-
-        }
-
-        $filename = $this->getFileName($path);
-
-        if (!$this->uploadScript($script, $filename)) {
-
-            $output->writeln('<error>Failed to upload script.</error>');
-            die;
-
-        }
-    }
-
-    /**
-     * Place the calls using the configured call service
-     *
-     * @param  InputInterface $input
-     *
-     * @return array
-     */
-    protected function placeCalls(InputInterface $input)
-    {
-        $numbers = explode(',', $input->getArgument('numbers'));
-
-        $from = $input->getOption('from') ?: Config::get('callservice.from');
-
-        $callIds = [];
-
-        foreach ($numbers as $to) {
-
-            $callIds[] = $this->callService->call(
-                $from,
-                $to,
-                $this->uploadName
-            );
-
-        }
-
-        return $callIds;
     }
 }

@@ -51,48 +51,25 @@ class CallMultiCommand extends CallCommand
 
         foreach ($batches as $batch) {
 
-            if (!$script = $this->getScript($batch['script'])) {
+            if (!$this->uploadCallScript($batch['script'], $output)) continue;
 
-                $path = $batch['script'];
-                $output->writeln("<error>$path is not a valid file</error>");
-                die;
-
-            }
-
-            $filename = $this->getFileName($batch['script']);
-
-            if (!$this->uploadScript($script, $filename)) {
-
-                $output->writeln('<error>Failed to upload script.</error>');
-                die;
-
-            }
-
-            foreach ($batch['to'] as $to) {
-
-                $from = $this->getFrom($batch);
-
-                $this->callIds[] = $this->callService->call(
-                    $from,
-                    $to,
-                    $this->uploadName
-                );
-
-            }
+            $this->callIds[] = $this->placeCalls(
+                $batch['to'],
+                array_key_exists('from', $batch) ?
+                    $batch['from'] :
+                    Config::get('callservice.from')
+            );
 
         }
 
-        if (!empty($this->callIds)) {
+        $results = $this->callService->getDetails($this->callIds);
 
-            $results = $this->callService->getDetails($this->callIds);
+        if (!empty($results)) {
 
-            if (!empty($results)) {
-
-                $table = $this->buildDetailsTable($results);
-
-                $table->render($output);
-
-            }
+            $this->resultsHandler->displayTable(
+                $this->getHelperSet()->get('table'),
+                $results
+            );
 
         }
 
@@ -130,23 +107,5 @@ class CallMultiCommand extends CallCommand
             return $allBatches;
 
         }
-    }
-
-    /**
-     * Get the from phone number for the call
-     *
-     * @param string $overrideFrom From phone number
-     *
-     * @return string
-     */
-    protected function getFrom($batch)
-    {
-        if (array_key_exists('from', $batch)) {
-
-            return $batch['from'];
-
-        }
-
-        return Config::get('callservice.from');
     }
 }

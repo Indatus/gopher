@@ -52,9 +52,14 @@ class CallDetailsCommand extends CallCommand{
 
             $results = $this->callService->getDetails($callIds);
 
-            $table = $this->buildDetailsTable($results);
+            if (!empty($results)) {
 
-            $table->render($output);
+                $this->resultsHandler->displayTable(
+                    $this->getHelperSet()->get('table'),
+                    $results
+                );
+
+            }
 
         } else {
 
