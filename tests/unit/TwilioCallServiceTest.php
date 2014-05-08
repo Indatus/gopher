@@ -76,12 +76,68 @@ class TwilioCallServiceTest extends PHPUnit_Framework_TestCase
 
         $this->calls->shouldReceive('getIterator')
             ->once()
-            ->with(0, 50, ['To' => '5551234567'])
+            ->with(0, 50, [
+                'To'=>'5551234567',
+                'From'=>'5551234568',
+                'Status'=>'completed',
+                'StartTime'=>'2014-01-01 05:00:00'
+            ])
             ->andReturn('foo');
 
         $this->callService->addFilter('to', '5551234567');
+        $this->callService->addFilter('from', '5551234568');
+        $this->callService->addFilter('status', 'completed');
+        $this->callService->addFilter('on', '2014-01-01');
         $results = $this->callService->getFilteredDetails();
 
         $this->assertEquals('foo', $results);
+    }
+
+    public function testAddAfterFilter()
+    {
+        $this->twilio->shouldReceive('getSubresources')
+            ->with('account')
+            ->andReturn($this->account);
+
+        $this->account->shouldReceive('getSubresources')
+            ->with('calls')
+            ->andReturn($this->calls);
+
+        $this->calls->shouldReceive('getIterator')
+            ->once()
+            ->with(0, 50, ['StartTime>' => '2014-01-01 05:00:00'])
+            ->andReturn('foo');
+
+        $this->callService->addFilter('after', '2014-01-01 00:00:00');
+        $results = $this->callService->getFilteredDetails();
+        $this->assertEquals('foo', $results);
+    }
+
+    public function testAddBeforeFilter()
+    {
+        $this->twilio->shouldReceive('getSubresources')
+            ->with('account')
+            ->andReturn($this->account);
+
+        $this->account->shouldReceive('getSubresources')
+            ->with('calls')
+            ->andReturn($this->calls);
+
+        $this->calls->shouldReceive('getIterator')
+            ->once()
+            ->with(0, 50, ['StartTime<' => '2014-01-01 05:00:00'])
+            ->andReturn('foo');
+
+        $this->callService->addFilter('before', '2014-01-01 00:00:00');
+        $results = $this->callService->getFilteredDetails();
+        $this->assertEquals('foo', $results);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInvalidFilterThrowsException()
+    {
+        $this->callService->addFilter('foo', 'bar');
     }
 }

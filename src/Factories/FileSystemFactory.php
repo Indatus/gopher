@@ -35,7 +35,7 @@ class FileSystemFactory
                 break;
 
             default:
-                throw new \InvalidArgumentException;
+                throw new \InvalidArgumentException('Unsupported driver provided');
                 break;
         }
     }

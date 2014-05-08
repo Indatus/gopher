@@ -16,8 +16,13 @@ class Config
     {
         $keys = explode('.', $key);
         $file = array_shift($keys);
+        $file = __DIR__ . '/../config/' . $file . '.php';
 
-        $config = require __DIR__ . '/../config/' . $file . '.php';
+        if (file_exists($file)) {
+            $config = require $file;
+        } else {
+            throw new \InvalidArgumentException('Invalid config file provided');
+        }
 
         $numKeys = count($keys);
 
@@ -32,7 +37,7 @@ class Config
                 return $config[$keys[0]];
                 break;
             default:
-                return null;
+                throw new \InvalidArgumentException('Invalid config key provided');
                 break;
         }
     }
@@ -49,7 +54,11 @@ class Config
     {
         $connections = static::get($file . '.connections');
 
-        return $connections[$default];
+        if (isset($connections[$default])) {
+            return $connections[$default];
+        } else {
+            throw new \InvalidArgumentException('Invalid connection key provided');
+        }
     }
 
     /**
