@@ -4,10 +4,10 @@ A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a s
 
 ## Installation with Composer
 
-You can install the library via Composer with the following one-liner:
+You can install the library via Composer with the following:
 
 ```
-$ composer create-project indatus/callbot
+$ composer create-project indatus/callbot --prefer-source
 ```
 
 If you need to pull Callbot into an existing project, add the following line to the
