@@ -42,6 +42,27 @@ class CallSingleCommand extends CallCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->uploadCallScript($input, $output);
+
+        $callIds = $this->placeCalls($input);
+
+        if (!empty($callIds)) {
+
+            $this->displayResults($callIds, $output);
+
+        }
+    }
+
+    /**
+     * Upload the call script to a remote file store
+     *
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
+     *
+     * @return mixed
+     */
+    protected function uploadCallScript(InputInterface $input, OutputInterface $output)
+    {
         $path = $input->getArgument('path');
 
         if (!$script = $this->getScript($path)) {
@@ -59,10 +80,22 @@ class CallSingleCommand extends CallCommand
             die;
 
         }
+    }
 
+    /**
+     * Place the calls using the configured call service
+     *
+     * @param  InputInterface $input
+     *
+     * @return array
+     */
+    protected function placeCalls(InputInterface $input)
+    {
         $numbers = explode(',', $input->getArgument('numbers'));
 
         $from = $input->getOption('from') ?: Config::get('callservice.from');
+
+        $callIds = [];
 
         foreach ($numbers as $to) {
 
@@ -74,17 +107,26 @@ class CallSingleCommand extends CallCommand
 
         }
 
-        if (!empty($callIds)) {
+        return $callIds;
+    }
 
-            $results = $this->callService->getDetails($callIds);
+    /**
+     * Display the results of placed calls
+     *
+     * @param  array           $callIds
+     * @param  OutputInterface $output
+     *
+     * @return string
+     */
+    protected function displayResults(array $callIds, OutputInterface $output)
+    {
+        $results = $this->callService->getDetails($callIds);
 
-            if (!empty($results)) {
+        if (!empty($results)) {
 
-                $table = $this->buildDetailsTable($results);
+            $table = $this->buildDetailsTable($results);
 
-                $table->render($output);
-
-            }
+            $table->render($output);
 
         }
     }
