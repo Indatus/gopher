@@ -46,9 +46,14 @@ class CallSingleCommand extends CallCommand
 
         $callIds = $this->placeCalls($input);
 
-        if (!empty($callIds)) {
+        $results = $this->callService->getDetails($callIds);
 
-            $this->displayResults($callIds, $output);
+        if (!empty($results)) {
+
+            $this->resultsHandler->displayTable(
+                $this->getHelperSet()->get('table'),
+                $results
+            );
 
         }
     }
@@ -108,26 +113,5 @@ class CallSingleCommand extends CallCommand
         }
 
         return $callIds;
-    }
-
-    /**
-     * Display the results of placed calls
-     *
-     * @param  array           $callIds
-     * @param  OutputInterface $output
-     *
-     * @return string
-     */
-    protected function displayResults(array $callIds, OutputInterface $output)
-    {
-        $results = $this->callService->getDetails($callIds);
-
-        if (!empty($results)) {
-
-            $table = $this->buildDetailsTable($results);
-
-            $table->render($output);
-
-        }
     }
 }

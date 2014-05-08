@@ -24,9 +24,9 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key'    => 'your-access-key',
-            'secret' => 'your-secret-key',
-            'bucket' => 'your-bucket-name'
+            'key'    => 'your_public_key',
+            'secret' => 'your_secret_key',
+            'bucket' => 'your_bucket_name'
         ]
 
     ]

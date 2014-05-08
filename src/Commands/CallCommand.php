@@ -3,6 +3,7 @@
 use Indatus\Callbot\Config;
 use Indatus\Callbot\Factories\FileSystemFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
+use Indatus\Callbot\Factories\ResultsHandlerFactory;
 use Symfony\Component\Console\Command\Command;
 
 /**
@@ -14,7 +15,7 @@ class CallCommand extends Command
     /**
      * CallServiceInterface implementation
      *
-     * @var CallService
+     * @var CallServiceInterface
      */
     protected $callService;
 
@@ -26,6 +27,13 @@ class CallCommand extends Command
     protected $fileSystem;
 
     /**
+     * ResultsHandlerInterface implementation
+     *
+     * @var ResultsHandlerInterface
+     */
+    protected $resultsHandler;
+
+    /**
      * Constructor injects factories and creates dependancies
      *
      * @param CallServiceFactory $callServiceFactory
@@ -33,10 +41,12 @@ class CallCommand extends Command
      */
     public function __construct(
         CallServiceFactory $callServiceFactory,
-        FileSystemFactory $fileSystemFactory
+        FileSystemFactory $fileSystemFactory,
+        ResultsHandlerFactory $resultsHandlerFactory
     ) {
         $this->callService = $callServiceFactory->make(Config::get('callservice.default'));
         $this->fileSystem = $fileSystemFactory->make(Config::get('filesystem.default'));
+        $this->resultsHandler = $resultsHandlerFactory->make(Config::get('callservice.default'));
         parent::__construct();
     }
 
@@ -102,20 +112,6 @@ class CallCommand extends Command
         }
 
         return $table;
-    }
-
-    /**
-     * Format the date for display
-     *
-     * @param string $date Date string to format
-     *
-     * @return DateTime
-     */
-    protected function formatDate($date)
-    {
-        return (new \DateTime($date))
-            ->setTimezone(new \DateTimeZone(Config::get('callservice.timezone')))
-            ->format('Y-m-d H:i:s');
     }
 
     /**

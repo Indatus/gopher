@@ -9,19 +9,32 @@ use Indatus\Callbot\Commands\CallSingleCommand;
 use Indatus\Callbot\Commands\CallDetailsCommand;
 use Indatus\Callbot\Factories\FileSystemFactory;
 use Indatus\Callbot\Factories\CallServiceFactory;
+use Indatus\Callbot\Factories\ResultsHandlerFactory;
 
 $application = new Application;
 
 $application->add(
-    new CallSingleCommand(new CallServiceFactory, new FileSystemFactory)
+    new CallSingleCommand(
+        new CallServiceFactory,
+        new FileSystemFactory,
+        new ResultsHandlerFactory
+    )
 );
 
 $application->add(
-    new CallMultiCommand(new CallServiceFactory, new FileSystemFactory)
+    new CallMultiCommand(
+        new CallServiceFactory,
+        new FileSystemFactory,
+        new ResultsHandlerFactory
+    )
 );
 
 $application->add(
-    new CallDetailsCommand(new CallServiceFactory, new FileSystemFactory)
+    new CallDetailsCommand(
+        new CallServiceFactory,
+        new FileSystemFactory,
+        new ResultsHandlerFactory
+    )
 );
 
 $application->run();
