@@ -26,6 +26,5 @@
             "name": "John Arstingstall",
             "email": "jarstingstall@indatus.com"
         }
-    ],
-    "minimum-stability": "dev"
+    ]
 }
