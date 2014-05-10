@@ -59,12 +59,16 @@ class CallMultiCommand extends CallCommand
 
             if (!$this->uploadCallScript($batch['script'], $output)) continue;
 
-            $this->callIds[] = $this->placeCalls(
+            $callIds = $this->placeCalls(
                 $batch['to'],
                 array_key_exists('from', $batch) ?
                     $batch['from'] :
                     Config::get('callservice.from')
             );
+
+            foreach ($callIds as $call) {
+                $this->callIds[] = $call;
+            }
 
         }
 
@@ -74,7 +78,8 @@ class CallMultiCommand extends CallCommand
 
             $this->resultsHandler->displayTable(
                 $this->getHelperSet()->get('table'),
-                $results
+                $results,
+                $output
             );
 
         }

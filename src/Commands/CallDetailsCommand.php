@@ -56,14 +56,15 @@ class CallDetailsCommand extends CallCommand{
 
                 $this->resultsHandler->displayTable(
                     $this->getHelperSet()->get('table'),
-                    $results
+                    $results,
+                    $output
                 );
 
             }
 
         } else {
 
-            $this->setFilters();
+            $this->setFilters($input);
 
             $results = $this->callService->getFilteredDetails();
 
@@ -71,14 +72,15 @@ class CallDetailsCommand extends CallCommand{
 
                 $this->resultsHandler->displayTable(
                     $this->getHelperSet()->get('table'),
-                    $results
+                    $results,
+                    $output
                 );
 
             }
         }
     }
 
-    protected function setFilters()
+    protected function setFilters(InputInterface $input)
     {
         if ($input->getOption('after')) {
 

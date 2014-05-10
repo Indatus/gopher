@@ -2,6 +2,7 @@
 
 use Indatus\Callbot\Config;
 use Symfony\Component\Console\Helper\TableHelper;
+use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class ResultsHandler
 {
@@ -13,7 +14,7 @@ abstract class ResultsHandler
      *
      * @return string
      */
-    public function displayTable(TableHelper $table, $results)
+    public function displayTable(TableHelper $table, $results, OutputInterface $output)
     {
         $table->setHeaders(
             ['Start Time', 'End Time', 'From', 'To', 'Status','Call ID']
@@ -27,7 +28,7 @@ abstract class ResultsHandler
 
         }
 
-        return $table;
+        $table->render($output);
     }
 
     /**

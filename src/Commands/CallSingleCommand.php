@@ -66,7 +66,8 @@ class CallSingleCommand extends CallCommand
 
             $this->resultsHandler->displayTable(
                 $this->getHelperSet()->get('table'),
-                $results
+                $results,
+                $output
             );
 
         }
