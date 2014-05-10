@@ -63,47 +63,57 @@ class CallDetailsCommand extends CallCommand{
 
         } else {
 
-            if ($input->getOption('after')) {
-
-                $this->callService->addFilter('after', $input->getOption('after'));
-
-            }
-
-            if ($input->getOption('before')) {
-
-                $this->callService->addFilter('before', $input->getOption('before'));
-
-            }
-
-            if ($input->getOption('on')) {
-
-                $this->callService->addFilter('on', $input->getOption('on'));
-
-            }
-
-            if ($input->getOption('to')) {
-
-                $this->callService->addFilter('to', $input->getOption('to'));
-
-            }
-
-            if ($input->getOption('from')) {
-
-                $this->callService->addFilter('from', $input->getOption('from'));
-
-            }
-
-            if ($input->getOption('status')) {
-
-                $this->callService->addFilter('status', $input->getOption('status'));
-
-            }
+            $this->setFilters();
 
             $results = $this->callService->getFilteredDetails();
 
-            $table = $this->buildDetailsTable($results);
+            if (!empty($results)) {
 
-            $table->render($output);
+                $this->resultsHandler->displayTable(
+                    $this->getHelperSet()->get('table'),
+                    $results
+                );
+
+            }
+        }
+    }
+
+    protected function setFilters()
+    {
+        if ($input->getOption('after')) {
+
+            $this->callService->addFilter('after', $input->getOption('after'));
+
+        }
+
+        if ($input->getOption('before')) {
+
+            $this->callService->addFilter('before', $input->getOption('before'));
+
+        }
+
+        if ($input->getOption('on')) {
+
+            $this->callService->addFilter('on', $input->getOption('on'));
+
+        }
+
+        if ($input->getOption('to')) {
+
+            $this->callService->addFilter('to', $input->getOption('to'));
+
+        }
+
+        if ($input->getOption('from')) {
+
+            $this->callService->addFilter('from', $input->getOption('from'));
+
+        }
+
+        if ($input->getOption('status')) {
+
+            $this->callService->addFilter('status', $input->getOption('status'));
+
         }
     }
 }
