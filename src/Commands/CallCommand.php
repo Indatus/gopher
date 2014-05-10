@@ -71,7 +71,7 @@ class CallCommand extends Command
 
         }
 
-        $this->uploadName = $$this->getFileName($path);
+        $this->uploadName = $this->getFileName($path);
 
         return $this->fileSystem->put(
             $this->uploadName,
