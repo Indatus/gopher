@@ -4,7 +4,7 @@ use Indatus\Callbot\Contracts\ResultsHandlerInterface;
 
 class TwilioResultsHandler extends ResultsHandler implements ResultsHandlerInterface
 {
-    public function buildRows($results)
+    protected function buildRows($results)
     {
         $rows = array();
 

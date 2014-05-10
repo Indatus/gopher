@@ -1,8 +1,9 @@
 <?php namespace Indatus\Callbot\Contracts;
 
 use Symfony\Component\Console\Helper\TableHelper;
+use Symfony\Component\Console\Output\OutputInterface;
 
 interface ResultsHandlerInterface
 {
-    public function buildRows($results);
+    public function displayTable(TableHelper $table, $results, OutputInterface $output);
 }
