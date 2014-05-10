@@ -26,10 +26,21 @@ class CallSingleCommand extends CallCommand
     {
         $this
             ->setName('call:single')
-            ->setDescription('Run a single batch of calls that share the same call script')
-            ->addArgument('numbers', InputArgument::REQUIRED, 'Comma-separated list of phone numbers to call')
+            ->setDescription(
+                'Run a single batch of calls that share the same call script'
+            )
+            ->addArgument(
+                'numbers',
+                InputArgument::REQUIRED,
+                'Comma-separated list of phone numbers to call'
+            )
             ->addArgument('path', InputArgument::REQUIRED, 'Path to call script')
-            ->addOption('from', null, InputOption::VALUE_REQUIRED, 'Override default from phone number');
+            ->addOption(
+                'from',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Override default from phone number'
+            );
     }
 
     /**

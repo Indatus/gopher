@@ -36,6 +36,9 @@ class Config
             case 1:
                 return $config[$keys[0]];
                 break;
+            case 0:
+                return $config;
+                break;
             default:
                 throw new \InvalidArgumentException('Invalid config key provided');
                 break;
@@ -68,7 +71,10 @@ class Config
      */
     public static function getRemoteDir()
     {
-        $connection = static::getConnection('filesystem', static::get('filesystem.default'));
+        $connection = static::getConnection(
+            'filesystem',
+            static::get('filesystem.default')
+        );
 
         switch($connection['driver']) {
             case 's3':

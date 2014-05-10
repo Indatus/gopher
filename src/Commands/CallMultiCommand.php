@@ -33,8 +33,14 @@ class CallMultiCommand extends CallCommand
     {
         $this
             ->setName('call:multi')
-            ->setDescription("Run multiple batches of calls, each batch having it's own call script")
-            ->addArgument('batches', InputArgument::OPTIONAL, 'Comma-separated list of batch names to run');
+            ->setDescription(
+                "Run multiple batches of calls, each batch having it's own call script"
+            )
+            ->addArgument(
+                'batches',
+                InputArgument::OPTIONAL,
+                'Comma-separated list of batch names to run'
+            );
     }
 
     /**
