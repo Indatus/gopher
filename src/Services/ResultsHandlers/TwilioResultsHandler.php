@@ -20,7 +20,8 @@ class TwilioResultsHandler extends ResultsHandler implements ResultsHandlerInter
                 $call->from_formatted,
                 $call->to_formatted,
                 $call->status,
-                $call->sid];
+                $call->sid
+            ];
 
         }
 
