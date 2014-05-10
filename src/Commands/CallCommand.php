@@ -37,17 +37,21 @@ class CallCommand extends Command
     /**
      * Constructor injects factories and creates dependancies
      *
-     * @param CallServiceFactory $callServiceFactory
-     * @param FileSystemFactory  $fileSystemFactory
+     * @param CallServiceFactory    $callServiceFactory
+     * @param FileSystemFactory     $fileSystemFactory
+     * @param ResultsHandlerFactory $resultsHandlerFactory
      */
     public function __construct(
         CallServiceFactory $callServiceFactory,
         FileSystemFactory $fileSystemFactory,
         ResultsHandlerFactory $resultsHandlerFactory
     ) {
-        $this->callService = $callServiceFactory->make(Config::get('callservice.default'));
-        $this->fileSystem = $fileSystemFactory->make(Config::get('filesystem.default'));
-        $this->resultsHandler = $resultsHandlerFactory->make(Config::get('callservice.default'));
+        $callService = Config::get('callservice.default');
+        $this->callService = $callServiceFactory->make($callService);
+        $this->fileSystem = $fileSystemFactory->make(
+            Config::get('filesystem.default')
+        );
+        $this->resultsHandler = $resultsHandlerFactory->make($callService);
         parent::__construct();
     }
     /**
@@ -67,34 +71,13 @@ class CallCommand extends Command
 
         }
 
-        if (!$this->uploadScript($script, $this->getFileName($path))) {
+        $this->uploadName = $$this->getFileName($path);
 
-            $output->writeln('<error>Failed to upload script.</error>');
-            return false;
-
-        }
-    }
-
-    /**
-     * Upload a script to a remote file store
-     *
-     * @param string $script Content to upload
-     *
-     * @return boolean
-     */
-    protected function uploadScript($script, $filename)
-    {
-        if (!is_null($script) || $script !== false) {
-
-            $this->uploadName = $filename;
-
-            return $this->fileSystem->put(
-                $this->uploadName,
-                $script,
-                ['visibility' => 'public']
-            );
-
-        }
+        return $this->fileSystem->put(
+            $this->uploadName,
+            $script,
+            ['visibility' => 'public']
+        );
     }
 
     /**
@@ -120,48 +103,6 @@ class CallCommand extends Command
         }
 
         return $callIds;
-    }
-
-    /**
-     * Display the details of multiple calls
-     *
-     * @param array $calls Array of call details objects
-     *
-     * @return Symfony\Component\Console\Output\OutputInterface
-     */
-    protected function buildDetailsTable($calls)
-    {
-        $table = $this->getHelperSet()->get('table');
-
-        $table->setHeaders(
-            ['Start Time', 'End Time', 'From', 'To', 'Status','Call ID']
-        );
-
-        $rows = array();
-
-        foreach ($calls as $call) {
-
-            $startTime = $this->formatDate($call->start_time);
-
-            $endTime = $this->formatDate($call->end_time);
-
-            $rows[] = [
-                $startTime,
-                $endTime,
-                $call->from_formatted,
-                $call->to_formatted,
-                $call->status,
-                $call->sid];
-
-        }
-
-        if (!empty($rows)) {
-
-            $table->setRows($rows);
-
-        }
-
-        return $table;
     }
 
     /**
