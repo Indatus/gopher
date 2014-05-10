@@ -18,9 +18,9 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $connection);
         $this->assertCount(4, $connection);
         $this->assertEquals($connection['driver'], 's3');
-        $this->assertEquals($connection['key'], 'your-access-key');
-        $this->assertEquals($connection['secret'], 'your-secret-key');
-        $this->assertEquals($connection['bucket'], 'your-bucket-name');
+        $this->assertEquals($connection['key'], 'your_access_key');
+        $this->assertEquals($connection['secret'], 'your_secret_key');
+        $this->assertEquals($connection['bucket'], 'your_bucket_name');
     }
 
     public function testGetThreeLevelsDeep()
@@ -37,8 +37,8 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $connection);
         $this->assertCount(3, $connection);
         $this->assertEquals($connection['driver'], 'twilio');
-        $this->assertEquals($connection['sid'], 'your-account-sid');
-        $this->assertEquals($connection['token'], 'your-auth-token');
+        $this->assertEquals($connection['sid'], 'your_account_sid');
+        $this->assertEquals($connection['token'], 'your_auth_token');
     }
 
     public function testGetConnectionFileSystem()
@@ -48,15 +48,15 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $connection);
         $this->assertCount(4, $connection);
         $this->assertEquals($connection['driver'], 's3');
-        $this->assertEquals($connection['key'], 'your-access-key');
-        $this->assertEquals($connection['secret'], 'your-secret-key');
-        $this->assertEquals($connection['bucket'], 'your-bucket-name');
+        $this->assertEquals($connection['key'], 'your_access_key');
+        $this->assertEquals($connection['secret'], 'your_secret_key');
+        $this->assertEquals($connection['bucket'], 'your_bucket_name');
     }
 
     public function testGetRemoteDir()
     {
         $remote = Config::getRemoteDir();
-        $this->assertEquals('https://s3.amazonaws.com/your-bucket-name/', $remote);
+        $this->assertEquals('https://s3.amazonaws.com/your_bucket_name/', $remote);
     }
 
     /**
