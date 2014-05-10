@@ -7,6 +7,7 @@ class ResultsHandlerFactoryTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->resultsHandlerFactory = new ResultsHandlerFactory;
+        parent::setUp();
     }
 
     /**

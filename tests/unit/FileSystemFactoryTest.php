@@ -7,6 +7,7 @@ class FileSystemFactoryTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->fileSystemFactory = new FileSystemFactory;
+        parent::setUp();
     }
 
     /**

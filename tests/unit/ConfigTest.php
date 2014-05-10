@@ -7,9 +7,9 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     public function testGetConfigFile()
     {
         $batches = Config::get('batches');
-
         $this->assertInternalType('array', $batches);
         $this->assertArrayHasKey('example-1', $batches);
+        parent::setUp();
     }
 
     public function testGetOneLevelDeep()

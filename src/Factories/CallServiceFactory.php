@@ -29,10 +29,6 @@ class CallServiceFactory
                     )
                 );
                 break;
-
-            default:
-                throw new \InvalidArgumentException('Unsupported driver provided');
-                break;
         }
     }
 }

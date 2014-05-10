@@ -7,6 +7,7 @@ class CallServiceFactoryTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->callServiceFactory = new CallServiceFactory;
+        parent::setUp();
     }
 
     /**

@@ -33,10 +33,6 @@ class FileSystemFactory
 
                 return new FileSystem(new AwsS3($client, $bucket));
                 break;
-
-            default:
-                throw new \InvalidArgumentException('Unsupported driver provided');
-                break;
         }
     }
 }

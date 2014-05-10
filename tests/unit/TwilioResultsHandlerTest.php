@@ -13,6 +13,7 @@ class TwilioResultsHandlerTest extends PHPUnit_Framework_TestCase
         $this->output = Mockery::mock(
             'Symfony\Component\Console\Output\OutputInterface'
         );
+        parent::setUp();
     }
 
     public function testDisplayTable()

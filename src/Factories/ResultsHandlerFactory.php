@@ -13,10 +13,6 @@ class ResultsHandlerFactory
             case 'twilio':
                 return new TwilioResultsHandler;
                 break;
-
-            default:
-                throw new \InvalidArgumentException('Unsupported driver provided');
-                break;
         }
     }
 }
