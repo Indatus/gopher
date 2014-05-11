@@ -53,7 +53,7 @@ class CallSingleCommand extends CallCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!$this->uploadCallScript($input->getArgument('path'), $output)) die;
+        if (!$this->uploadCallScript($input->getArgument('path'), $output)) return;
 
         $callIds = $this->placeCalls(
             explode(',', $input->getArgument('numbers')),

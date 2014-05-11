@@ -69,35 +69,39 @@ class CallSingleCommandTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
-    // public function testExecuteWithInvalidFilePath()
-    // {
-    //     $this->callServiceFactory
-    //         ->shouldReceive('make')
-    //         ->andReturn($this->callService);
+    public function testExecuteWithInvalidFilePath()
+    {
+        $this->callServiceFactory
+            ->shouldReceive('make')
+            ->andReturn($this->callService);
 
-    //     $this->fileSystemFactory
-    //         ->shouldReceive('make')
-    //         ->andReturn($this->fileSystem);
+        $this->fileSystemFactory
+            ->shouldReceive('make')
+            ->andReturn($this->fileSystem);
 
-    //     $this->resultsHandlerFactory
-    //         ->shouldReceive('make')
-    //         ->andReturn($this->resultsHandler);
+        $this->resultsHandlerFactory
+            ->shouldReceive('make')
+            ->andReturn($this->resultsHandler);
 
-    //     $application = new Application();
-    //     $application->add(new CallSingleCommand(
-    //         $this->callServiceFactory,
-    //         $this->fileSystemFactory,
-    //         $this->resultsHandlerFactory
-    //     ));
+        $application = new Application();
+        $application->add(new CallSingleCommand(
+            $this->callServiceFactory,
+            $this->fileSystemFactory,
+            $this->resultsHandlerFactory
+        ));
 
-    //     $command = $application->find('call:single');
-    //     $commandTester = new CommandTester($command);
+        $command = $application->find('call:single');
+        $commandTester = new CommandTester($command);
 
-    //     $commandTester->execute([
-    //         'command' => $command->getName(),
-    //         'numbers' => '5551234567',
-    //         'path' => 'call-scripts/foo.xml'
-    //     ]);
+        $commandTester->execute([
+            'command' => $command->getName(),
+            'numbers' => '5551234567',
+            'path' => 'call-scripts/foo.xml'
+        ]);
 
-    // }
+        $this->assertRegExp(
+            '/call-scripts\/foo.xml is not a valid file/',
+            $commandTester->getDisplay()
+        );
+    }
 }
