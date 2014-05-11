@@ -71,7 +71,7 @@ class CallCommand extends Command
 
         }
 
-        $this->uploadName = $this->getFileName($path);
+        $this->uploadName = pathinfo($path, PATHINFO_FILENAME) . '.' . pathinfo($path, PATHINFO_EXTENSION);
 
         return $this->fileSystem->put(
             $this->uploadName,
@@ -103,20 +103,6 @@ class CallCommand extends Command
         }
 
         return $callIds;
-    }
-
-    /**
-     * Get a file name from a path
-     *
-     * @param string $path Path to a file
-     *
-     * @return string
-     */
-    protected function getFileName($path)
-    {
-        $parts = explode('/', $path);
-
-        return end($parts);
     }
 
     /**
