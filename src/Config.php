@@ -8,7 +8,7 @@ class Config
     /**
      * Get an element from the config array
      *
-     * @param string $key Config key to get
+     * @param string $key
      *
      * @return mixed
      */

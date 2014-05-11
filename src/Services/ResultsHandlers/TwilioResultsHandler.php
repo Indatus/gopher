@@ -4,6 +4,13 @@ use Indatus\Callbot\Contracts\ResultsHandlerInterface;
 
 class TwilioResultsHandler extends ResultsHandler implements ResultsHandlerInterface
 {
+    /**
+     * Build the rows of data to be displayed in table format
+     *
+     * @param  array $results
+     *
+     * @return array
+     */
     protected function buildRows($results)
     {
         $rows = array();

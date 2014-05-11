@@ -80,6 +80,13 @@ class CallDetailsCommand extends CallCommand{
         }
     }
 
+    /**
+     * Set the callservice filters passed in as options
+     *
+     * @param InputInterface $input
+     *
+     * @return void
+     */
     protected function setFilters(InputInterface $input)
     {
         if ($input->getOption('after')) {

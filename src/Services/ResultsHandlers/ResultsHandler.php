@@ -9,8 +9,9 @@ abstract class ResultsHandler
     /**
      * Display the results of calls in table format
      *
-     * @param  TableHelper $table
-     * @param  mixed       $results
+     * @param  TableHelper     $table
+     * @param  mixed           $results
+     * @param  OutputInterface $output
      *
      * @return string
      */
@@ -34,7 +35,7 @@ abstract class ResultsHandler
     /**
      * Format the date for display
      *
-     * @param string $date Date string to format
+     * @param string $date
      *
      * @return DateTime
      */
