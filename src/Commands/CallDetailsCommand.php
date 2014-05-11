@@ -46,9 +46,9 @@ class CallDetailsCommand extends CallCommand{
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($input->getOption('id')) {
+        if ($id = $input->getOption('id')) {
 
-            $callIds = explode(',', $input->getOption('id'));
+            $callIds = explode(',', $id);
 
             $results = $this->callService->getDetails($callIds);
 
