@@ -1,6 +1,6 @@
 {
     "name": "indatus/callbot",
-    "description": "A Twilio bot that will call numbers for you and leave messages, used for testing telecom dial-in apps.",
+    "description": "A CLI tool for automated testing of telecom dial-in apps.",
     "require": {
         "php": ">=5.4",
         "twilio/sdk": "dev-master",
