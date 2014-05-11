@@ -13,6 +13,6 @@ class ResultsHandlerFactory
             case 'twilio':
                 return new TwilioResultsHandler;
                 break;
-        }
-    }
+        } // @codeCoverageIgnore
+    } // @codeCoverageIgnore
 }

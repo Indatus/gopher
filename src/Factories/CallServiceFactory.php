@@ -29,6 +29,6 @@ class CallServiceFactory
                     )
                 );
                 break;
-        }
-    }
+        } // @codeCoverageIgnore
+    } // @codeCoverageIgnore
 }

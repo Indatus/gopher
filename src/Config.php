@@ -79,6 +79,6 @@ class Config
         switch($connection['driver']) {
             case 's3':
                 return 'https://s3.amazonaws.com/' . $connection['bucket'] . '/';
-        }
-    }
+        } // @codeCoverageIgnore
+    } // @codeCoverageIgnore
 }
