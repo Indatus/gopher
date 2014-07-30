@@ -1,16 +1,18 @@
-# Callbot
+# Gopher
 
-A stand-alone PHP package for testing telecom dial-in apps. Callbot provides a simple CLI interface for making batches of test calls. It is configured to use Twilio out of the box, but can be configured to use any similar service. Credit to [brainwebb01](https://github.com/brianwebb01) for the original concept for this package.
+![Gopher Banner](https://s3-us-west-2.amazonaws.com/oss-avatars/gopher.png)
+
+A stand-alone PHP package for testing telecom dial-in apps. Gopher provides a simple CLI interface for making batches of test calls. It is configured to use Twilio out of the box, but can be configured to use any similar service. Credit to [brainwebb01](https://github.com/brianwebb01) for the original concept for this package.
 
 ## Installation with Composer
 
-Install Callbot via Composer with the following one-liner:
+Install Gopher via Composer with the following one-liner:
 
 ```
 $ composer create-project indatus/callbot --prefer-source
 ```
 
-If you need to pull Callbot into an existing project, add the following line to the
+If you need to pull Gopher into an existing project, add the following line to the
 require block of your composer.json:
 
 ```
@@ -33,7 +35,7 @@ Select from PHP's supported timezone list [here](http://www.php.net/manual/en/ti
 
 ### Amazon S3 Setup
 
-Twilio requires an XML script located at a public URL for each call it makes. The script at this URL tells Twilio what to do once the call is answered. Callbot is configured to push your scripts up to an Amazon S3 bucket out of the box.
+Twilio requires an XML script located at a public URL for each call it makes. The script at this URL tells Twilio what to do once the call is answered. Gopher is configured to push your scripts up to an Amazon S3 bucket out of the box.
 
 1. Signup for an [Amazon S3](https://console.aws.amazon.com/s3/) account.
 2. Create a bucket and give Everyone "View" permissions in the S3 console.
