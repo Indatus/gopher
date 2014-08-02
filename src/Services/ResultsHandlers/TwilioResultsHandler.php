@@ -19,11 +19,8 @@ class TwilioResultsHandler extends ResultsHandler implements ResultsHandlerInter
 
             $startTime = $this->formatDate($call->start_time);
 
-            $endTime = $this->formatDate($call->end_time);
-
             $rows[] = [
                 $startTime,
-                $endTime,
                 $call->from_formatted,
                 $call->to_formatted,
                 $call->status,

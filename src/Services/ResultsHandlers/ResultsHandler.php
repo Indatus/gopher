@@ -18,7 +18,7 @@ abstract class ResultsHandler
     public function displayTable(TableHelper $table, $results, OutputInterface $output)
     {
         $table->setHeaders(
-            ['Start Time', 'End Time', 'From', 'To', 'Status','Call ID']
+            ['Start Time', 'From', 'To', 'Status','Call ID']
         );
 
         $rows = $this->buildRows($results);
