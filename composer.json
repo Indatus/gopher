@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Indatus\\Callbot\\": "src/"
+            "Indatus\\Gopher\\": "src/"
         }
     },
     "bin": [

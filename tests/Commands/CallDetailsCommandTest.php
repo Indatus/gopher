@@ -1,19 +1,19 @@
 <?php
 
 use Symfony\Component\Console\Application;
-use Indatus\Callbot\Commands\CallDetailsCommand;
+use Indatus\Gopher\Commands\CallDetailsCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class CallDetailsCommandTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->callServiceFactory = Mockery::mock('Indatus\Callbot\Factories\CallServiceFactory');
-        $this->fileSystemFactory = Mockery::mock('Indatus\Callbot\Factories\FileSystemFactory');
-        $this->resultsHandlerFactory = Mockery::mock('Indatus\Callbot\Factories\ResultsHandlerFactory');
-        $this->callService = Mockery::mock('Indatus\Callbot\Contracts\CallServiceInterface');
+        $this->callServiceFactory = Mockery::mock('Indatus\Gopher\Factories\CallServiceFactory');
+        $this->fileSystemFactory = Mockery::mock('Indatus\Gopher\Factories\FileSystemFactory');
+        $this->resultsHandlerFactory = Mockery::mock('Indatus\Gopher\Factories\ResultsHandlerFactory');
+        $this->callService = Mockery::mock('Indatus\Gopher\Contracts\CallServiceInterface');
         $this->fileSystem = Mockery::mock('League\Flysystem\Filesystem');
-        $this->resultsHandler = Mockery::mock('Indatus\Callbot\Contracts\ResultsHandlerInterface');
+        $this->resultsHandler = Mockery::mock('Indatus\Gopher\Contracts\ResultsHandlerInterface');
         parent::setUp();
     }
 

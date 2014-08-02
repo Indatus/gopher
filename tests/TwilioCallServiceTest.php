@@ -1,13 +1,13 @@
 <?php
 
-use Indatus\Callbot\TwilioCallService;
+use Indatus\Gopher\TwilioCallService;
 
 class TwilioCallServiceTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
         $this->twilio = Mockery::mock('Services_Twilio');
-        $this->config = Mockery::mock('Indatus\Callbot\Config');
+        $this->config = Mockery::mock('Indatus\Gopher\Config');
         $this->calls = Mockery::mock('Services_Twilio_Rest_Calls');
         $this->account = Mockery::mock('Services_Twilio_Rest_Account');
 

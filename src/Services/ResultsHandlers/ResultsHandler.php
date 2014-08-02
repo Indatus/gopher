@@ -1,6 +1,6 @@
-<?php namespace Indatus\Callbot\Services\ResultsHandlers;
+<?php namespace Indatus\Gopher\Services\ResultsHandlers;
 
-use Indatus\Callbot\Config;
+use Indatus\Gopher\Config;
 use Symfony\Component\Console\Helper\TableHelper;
 use Symfony\Component\Console\Output\OutputInterface;
 

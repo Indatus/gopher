@@ -2,3 +2,5 @@ vendor/
 call-scripts/*
 !call-scripts/test-script.xml
 coverage/
+.idea
+

@@ -1,4 +1,4 @@
-<?php namespace Indatus\Callbot\Contracts;
+<?php namespace Indatus\Gopher\Contracts;
 
 use Symfony\Component\Console\Helper\TableHelper;
 use Symfony\Component\Console\Output\OutputInterface;

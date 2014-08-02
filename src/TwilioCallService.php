@@ -1,8 +1,8 @@
-<?php namespace Indatus\Callbot;
+<?php namespace Indatus\Gopher;
 
 use Services_Twilio;
-use Indatus\Callbot\Config;
-use Indatus\Callbot\Contracts\CallServiceInterface;
+use Indatus\Gopher\Config;
+use Indatus\Gopher\Contracts\CallServiceInterface;
 
 /**
  * This class is a Twilio implementation of the CallServiceInterface

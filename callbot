@@ -1,15 +1,15 @@
 #!/usr/bin/env php
 <?php
 
-require "vendor/autoload.php";
+require_once "vendor/autoload.php";
 
 use Symfony\Component\Console\Application;
-use Indatus\Callbot\Commands\CallMultiCommand;
-use Indatus\Callbot\Commands\CallSingleCommand;
-use Indatus\Callbot\Commands\CallDetailsCommand;
-use Indatus\Callbot\Factories\FileSystemFactory;
-use Indatus\Callbot\Factories\CallServiceFactory;
-use Indatus\Callbot\Factories\ResultsHandlerFactory;
+use Indatus\Gopher\Commands\CallMultiCommand;
+use Indatus\Gopher\Commands\CallSingleCommand;
+use Indatus\Gopher\Commands\CallDetailsCommand;
+use Indatus\Gopher\Factories\FileSystemFactory;
+use Indatus\Gopher\Factories\CallServiceFactory;
+use Indatus\Gopher\Factories\ResultsHandlerFactory;
 
 $application = new Application;
 

@@ -1,4 +1,4 @@
-<?php namespace Indatus\Callbot;
+<?php namespace Indatus\Gopher;
 
 /**
  * This class is used to interact with the configuration file.

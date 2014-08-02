@@ -1,8 +1,8 @@
-<?php namespace Indatus\Callbot\Factories;
+<?php namespace Indatus\Gopher\Factories;
 
 use Services_Twilio;
-use Indatus\Callbot\Config;
-use Indatus\Callbot\TwilioCallService;
+use Indatus\Gopher\Config;
+use Indatus\Gopher\TwilioCallService;
 
 /**
  * This class is a factory for creating CallServiceInterface implementations

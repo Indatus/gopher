@@ -1,9 +1,9 @@
-<?php namespace Indatus\Callbot\Commands;
+<?php namespace Indatus\Gopher\Commands;
 
-use Indatus\Callbot\Config;
-use Indatus\Callbot\Factories\FileSystemFactory;
-use Indatus\Callbot\Factories\CallServiceFactory;
-use Indatus\Callbot\Factories\ResultsHandlerFactory;
+use Indatus\Gopher\Config;
+use Indatus\Gopher\Factories\FileSystemFactory;
+use Indatus\Gopher\Factories\CallServiceFactory;
+use Indatus\Gopher\Factories\ResultsHandlerFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 

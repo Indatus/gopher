@@ -1,6 +1,6 @@
 <?php
 
-use Indatus\Callbot\Factories\CallServiceFactory;
+use Indatus\Gopher\Factories\CallServiceFactory;
 
 class CallServiceFactoryTest extends PHPUnit_Framework_TestCase
 {
@@ -22,6 +22,6 @@ class CallServiceFactoryTest extends PHPUnit_Framework_TestCase
     {
         $twilio = $this->callServiceFactory->make('twilio');
 
-        $this->assertInstanceOf('Indatus\Callbot\TwilioCallService', $twilio);
+        $this->assertInstanceOf('Indatus\Gopher\TwilioCallService', $twilio);
     }
 }

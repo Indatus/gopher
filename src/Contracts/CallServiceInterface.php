@@ -1,4 +1,4 @@
-<?php namespace Indatus\Callbot\Contracts;
+<?php namespace Indatus\Gopher\Contracts;
 
 interface CallServiceInterface
 {
