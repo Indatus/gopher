@@ -1,6 +1,6 @@
 <?php
 
-use Indatus\Callbot\Services\ResultsHandlers\TwilioResultsHandler;
+use Indatus\Gopher\Services\ResultsHandlers\TwilioResultsHandler;
 
 class TwilioResultsHandlerTest extends PHPUnit_Framework_TestCase
 {

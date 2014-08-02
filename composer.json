@@ -1,5 +1,5 @@
 {
-    "name": "indatus/callbot",
+    "name": "indatus/gopher",
     "description": "A CLI tool for automated testing of telecom dial-in apps.",
     "require": {
         "php": ">=5.4",
@@ -14,11 +14,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Indatus\\Callbot\\": "src/"
+            "Indatus\\Gopher\\": "src/"
         }
     },
     "bin": [
-        "callbot"
+        "gopher"
     ],
     "license": "MIT",
     "authors": [

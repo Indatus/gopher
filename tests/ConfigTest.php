@@ -1,6 +1,6 @@
 <?php
 
-use Indatus\Callbot\Config;
+use Indatus\Gopher\Config;
 
 class ConfigTest extends PHPUnit_Framework_TestCase
 {

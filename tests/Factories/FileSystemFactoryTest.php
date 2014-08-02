@@ -1,6 +1,6 @@
 <?php
 
-use Indatus\Callbot\Factories\FileSystemFactory;
+use Indatus\Gopher\Factories\FileSystemFactory;
 
 class FileSystemFactoryTest extends PHPUnit_Framework_TestCase
 {

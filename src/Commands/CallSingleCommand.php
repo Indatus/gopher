@@ -1,7 +1,7 @@
-<?php namespace Indatus\Callbot\Commands;
+<?php namespace Indatus\Gopher\Commands;
 
-use Indatus\Callbot\Config;
-use Indatus\Callbot\Commands\CallCommand;
+use Indatus\Gopher\Config;
+use Indatus\Gopher\Commands\CallCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;

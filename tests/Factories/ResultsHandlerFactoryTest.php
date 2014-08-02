@@ -1,6 +1,6 @@
 <?php
 
-use Indatus\Callbot\Factories\ResultsHandlerFactory;
+use Indatus\Gopher\Factories\ResultsHandlerFactory;
 
 class ResultsHandlerFactoryTest extends PHPUnit_Framework_TestCase
 {
@@ -23,7 +23,7 @@ class ResultsHandlerFactoryTest extends PHPUnit_Framework_TestCase
         $twilio = $this->resultsHandlerFactory->make('twilio');
 
         $this->assertInstanceOf(
-            'Indatus\Callbot\Services\ResultsHandlers\TwilioResultsHandler',
+            'Indatus\Gopher\Services\ResultsHandlers\TwilioResultsHandler',
             $twilio
         );
     }

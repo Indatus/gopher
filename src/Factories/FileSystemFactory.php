@@ -1,7 +1,7 @@
-<?php namespace Indatus\Callbot\Factories;
+<?php namespace Indatus\Gopher\Factories;
 
 use Aws\S3\S3Client;
-use Indatus\Callbot\Config;
+use Indatus\Gopher\Config;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Adapter\AwsS3;
 

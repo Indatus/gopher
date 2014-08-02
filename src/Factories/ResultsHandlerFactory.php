@@ -1,7 +1,7 @@
-<?php namespace Indatus\Callbot\Factories;
+<?php namespace Indatus\Gopher\Factories;
 
-use Indatus\Callbot\Config;
-use Indatus\Callbot\Services\ResultsHandlers\TwilioResultsHandler;
+use Indatus\Gopher\Config;
+use Indatus\Gopher\Services\ResultsHandlers\TwilioResultsHandler;
 
 class ResultsHandlerFactory
 {

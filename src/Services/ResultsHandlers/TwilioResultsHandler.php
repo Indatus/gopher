@@ -1,6 +1,6 @@
-<?php namespace Indatus\Callbot\Services\ResultsHandlers;
+<?php namespace Indatus\Gopher\Services\ResultsHandlers;
 
-use Indatus\Callbot\Contracts\ResultsHandlerInterface;
+use Indatus\Gopher\Contracts\ResultsHandlerInterface;
 
 class TwilioResultsHandler extends ResultsHandler implements ResultsHandlerInterface
 {
