@@ -9,14 +9,14 @@ A stand-alone PHP package for testing telecom dial-in apps. Gopher provides a si
 Install Gopher via Composer with the following one-liner:
 
 ```
-$ composer create-project indatus/callbot --prefer-source
+$ composer create-project indatus/gopher --prefer-source
 ```
 
 If you need to pull Gopher into an existing project, add the following line to the
 require block of your composer.json:
 
 ```
-"indatus/callbot": "dev-master"
+"indatus/gopher": "dev-master"
 ```
 
 Next run `composer install`.
@@ -47,7 +47,7 @@ Twilio requires an XML script located at a public URL for each call it makes. Th
 
 ## Usage
 
-The root-level `callbot` executable is used to run three different commands:
+The root-level `gopher` executable is used to run three different commands:
 
 | Command Name | Description                                                           |
 | ------------ | --------------------------------------------------------------------- |
@@ -65,23 +65,23 @@ See below for further description and usage examples of each.
 The `call:single` command can be used to run a single batch of calls that share the same call script. It requires two arguments:
 
 1. A comma-separated list of phone numbers to call
-2. The local path to the call script relative to the `callbot` executable
+2. The local path to the call script relative to the `gopher` executable
 
 ```
-$ ./callbot call:single 5551234567,5551234561,5551234562 call-scripts/test-script.xml
+$ ./gopher call:single 5551234567,5551234561,5551234562 call-scripts/test-script.xml
 ```
 
 `call:single` uses the default from phone number you provided in `congig.php`. You can override the default from number by passing the `from` option:
 
 ```
-$ ./callbot call:single 5551234567 call-scripts/test-script.xml --from="5551234567"
+$ ./gopher call:single 5551234567 call-scripts/test-script.xml --from="5551234567"
 ```
 
 > The root-level `call-scripts` directory is used to store your call scripts. An example script is provided to
 > get you up and running quickly. The example script contains [TwiML](https://www.twilio.com/docs/api/twiml)
 > (Twilio Markup Language) that tells Twilio how to handle the outgoing call. Feel free to modify `test-script.xml`
 > and create your own call scripts. You can store your scripts globally, just be sure the path provided is
-> relative to the `callbot` executable.
+> relative to the `gopher` executable.
 
 
 ---
@@ -122,7 +122,7 @@ A batch has two required elements: `to` and `script`. `to` is an array of phone 
 Add as many batches as you'd like to the `batches` array and then run:
 
 ```
-$ ./callbot call:multi
+$ ./gopher call:multi
 ```
 
 #### Run Specific Batches
@@ -131,7 +131,7 @@ You can pass a comma-separated list of batch names to `call:multi` to specify wh
 batches to run. Make sure to give your batches unique names if you want to use this feature.
 
 ```
-$ ./callbot call:multi example-1,example-2
+$ ./gopher call:multi example-1,example-2
 ```
 
 ---
@@ -143,13 +143,13 @@ The `call:details` command can be used to display the details of outgoing calls.
 Display the details of a specific call with the `id` option:
 
 ```
-$ ./callbot call:details --id="UNIQUE_ID"
+$ ./gopher call:details --id="UNIQUE_ID"
 ```
 
 You can specify multiple unique ids with the `id` option.
 
 ```
-$ ./callbot call:details --id="UNIQUE_ID_1,UNIQUE_ID_2,UNIQUE_ID_3"
+$ ./gopher call:details --id="UNIQUE_ID_1,UNIQUE_ID_2,UNIQUE_ID_3"
 ```
 
 ### Using Filters to Narrow Call Details
@@ -170,17 +170,17 @@ $ ./callbot call:details --id="UNIQUE_ID_1,UNIQUE_ID_2,UNIQUE_ID_3"
 Get details for calls made on **April 5, 2014** from **555-123-4567**
 
 ```
-$ ./callbot call:details --on="2014-04-05" --from="5551234567"
+$ ./gopher call:details --on="2014-04-05" --from="5551234567"
 ```
 
 Get details for calls made between **7:00 am** and **10:00 am** on **April 5, 2014** with a **completed** status
 
 ```
-$ ./callbot call:details --after="2014-04-05 07:00:00" --before="2014-04-05 10:00:00" --status="completed"
+$ ./gopher call:details --after="2014-04-05 07:00:00" --before="2014-04-05 10:00:00" --status="completed"
 ```
 
 Display details for all **failed** calls made to **555-123-4567**
 
 ```
-$ ./callbot call:details --status="failed" --to="5551234567"
+$ ./gopher call:details --status="failed" --to="5551234567"
 ```
